@@ -1,0 +1,54 @@
+{
+  "login": "WaltherMoraRivera",
+  "name": "Walther Mora Rivera",
+  "role": "Analista Programador · INACAP Apoquindo",
+  "bio": "Desarrollo aplicaciones web, backend e IoT completas, de la base de datos a la interfaz, y las llevo a producción. Me importan el trabajo en equipo, la documentación y las pruebas.",
+  "pills": ["Python", "TypeScript", "Django", "Next.js", "MySQL", "IoT"],
+  "languages_ignore": ["Batchfile", "Dockerfile"],
+  "projects": [
+    {
+      "repo": "WaltherMoraRivera/Titulares_futbol_app",
+      "title": "TITULARES",
+      "label": "APP WEB · PWA",
+      "desc": "Gestión de un equipo de fútbol amateur desde el celular: plantilla, asistencia, formación con drag & drop y bitácora del partido en vivo.",
+      "stack": ["Next.js 16", "TypeScript", "Supabase", "Tailwind v4"],
+      "status": "En producción · Vercel",
+      "kind": "prod"
+    },
+    {
+      "repo": "WaltherMoraRivera/StarLance_Alpha",
+      "title": "StarLance",
+      "label": "FULL-STACK · API REST",
+      "desc": "Sistema gamificado de tareas del hogar: los niños marcan lo que hicieron, ganan estrellas cuando el admin lo aprueba y las canjean por recompensas.",
+      "stack": ["FastAPI", "React 18", "MongoDB", "Docker"],
+      "status": "v1.0 en producción · Railway",
+      "kind": "prod"
+    },
+    {
+      "repo": "Trinity-Codex/Proyecto_CondoHub",
+      "title": "CondoHub",
+      "label": "PLATAFORMA WEB · EQUIPO DE 3",
+      "desc": "Gestión de condominios con roles y varios condominios: gastos comunes, pagos, morosidad, reservas sin traslape e incidentes. Patrones Observer y Strategy.",
+      "stack": ["Django 5.2", "MySQL 8", "Bootstrap 5", "GitHub Actions"],
+      "status": "CI con MySQL 8 · 241 pruebas",
+      "kind": "prod"
+    },
+    {
+      "repo": "WaltherMoraRivera/Proyecto_Iot",
+      "title": "Monitor de vibración IoT",
+      "label": "IoT · SISTEMAS EMBEBIDOS",
+      "desc": "Dos ESP32 conectados por WiFi y MQTT: un nodo detecta vibración sostenida con un MPU6050 y activa la alarma; el otro la controla a distancia con mensajes firmados.",
+      "stack": ["C++", "ESP32", "MQTT", "HMAC-SHA256", "Wokwi"],
+      "status": "Prototipo simulado en Wokwi",
+      "kind": "proto"
+    }
+  ],
+  "toolkit": [
+    { "label": "Lenguajes", "items": ["Python", "TypeScript", "JavaScript", "C++", "SQL", "GDScript"] },
+    { "label": "Backend", "items": ["Django", "FastAPI", "API REST", "JWT", "pytest"] },
+    { "label": "Frontend", "items": ["Next.js", "React", "Tailwind CSS", "Bootstrap", "shadcn/ui"] },
+    { "label": "Datos", "items": ["MySQL", "PostgreSQL", "MongoDB", "Oracle", "NumPy / Pandas"] },
+    { "label": "IoT", "items": ["ESP32", "MQTT", "Arduino", "Wokwi"] },
+    { "label": "Entrega", "items": ["Git", "GitHub Actions", "Docker", "Vercel", "Railway"] }
+  ]
+}

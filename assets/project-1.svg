@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="279" viewBox="0 0 420 279" role="img" aria-label="TITULARES (WaltherMoraRivera/Titulares_futbol_app): Gestión de un equipo de fútbol amateur desde el celular: plantilla, asistencia, formación con drag &amp; drop y bitácora del partido en vivo. Tecnologías: Next.js 16, TypeScript, Supabase, Tailwind v4."><title>TITULARES (WaltherMoraRivera/Titulares_futbol_app): Gestión de un equipo de fútbol amateur desde el celular: plantilla, asistencia, formación con drag &amp; drop y bitácora del partido en vivo. Tecnologías: Next.js 16, TypeScript, Supabase, Tailwind v4.</title><style>
+.f{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif}
+.m{font-family:ui-monospace,SFMono-Regular,"SF Mono",Consolas,"Liberation Mono",monospace}
+.frame{fill:#f6f8fa;stroke:#bcd0e6}
+.panel{fill:#fff;fill-opacity:.72;stroke:#c3d4e8}
+.tile{fill:#fff;fill-opacity:.85;stroke:#c3d4e8}
+.chip{fill:#eef3f9;stroke:#cdd9e6}
+.pill{fill:#fff;fill-opacity:.6;stroke:#7fb2f0}
+.track{fill:#e2e9f1}.trk{stroke:#e2e9f1}
+.t1{fill:#1f2328}.t2{fill:#59636e}.ac{fill:#0969da}
+.c-blue{fill:#0969da}.c-cyan{fill:#0e7490}.c-purple{fill:#8250df}.c-green{fill:#1a7f37}
+.n1{stop-color:#0969da}.n2{stop-color:#0e7490}
+.sep{stroke:#d0dbe8}.ring{stroke:#1f6feb;fill:none}
+.d-prod{fill:#1a7f37}.d-proto{fill:#bf8700}
+.gba{stop-color:#3b82f6;stop-opacity:.16}.gbb{stop-color:#3b82f6;stop-opacity:0}
+.gga{stop-color:#22c55e;stop-opacity:.10}.ggb{stop-color:#22c55e;stop-opacity:0}
+.gta{stop-color:#14b8a6;stop-opacity:.14}.gtb{stop-color:#14b8a6;stop-opacity:0}
+.gpa{stop-color:#8b5cf6;stop-opacity:.12}.gpb{stop-color:#8b5cf6;stop-opacity:0}
+.h0{fill:#e6ebf1}.h1{fill:#c3dcff}.h2{fill:#86b8ff}.h3{fill:#4a90ee}.h4{fill:#1f6feb}
+@media (prefers-color-scheme:dark){
+.frame{fill:#0d131b;stroke:#2a4a70}
+.panel{fill:#070a0f;fill-opacity:.78;stroke:#26466b}
+.tile{fill:#090d13;fill-opacity:.9;stroke:#2b4f78}
+.chip{fill:#0e151e;stroke:#27415f}
+.pill{fill:#0b121b;fill-opacity:.7;stroke:#2f6bb3}
+.track{fill:#1d242e}.trk{stroke:#1d242e}
+.t1{fill:#f0f6fc}.t2{fill:#9198a1}.ac{fill:#58a6ff}
+.c-blue{fill:#58a6ff}.c-cyan{fill:#22d3ee}.c-purple{fill:#a371f7}.c-green{fill:#3fb950}
+.n1{stop-color:#7dd3fc}.n2{stop-color:#38bdf8}
+.sep{stroke:#26364a}.ring{stroke:#2f81f7}
+.d-prod{fill:#3fb950}.d-proto{fill:#d29922}
+.gba{stop-opacity:.38}.gga{stop-opacity:.22}.gta{stop-opacity:.30}.gpa{stop-opacity:.26}
+.h0{fill:#1b222c}.h1{fill:#0e3a73}.h2{fill:#1456b3}.h3{fill:#2f81f7}.h4{fill:#79c0ff}}
+</style><defs><clipPath id="fc"><rect x="6" y="6" width="408" height="267" rx="14"/></clipPath><radialGradient id="gb"><stop offset="0" class="gba"/><stop offset="1" class="gbb"/></radialGradient><radialGradient id="gg"><stop offset="0" class="gga"/><stop offset="1" class="ggb"/></radialGradient><radialGradient id="gt"><stop offset="0" class="gta"/><stop offset="1" class="gtb"/></radialGradient><radialGradient id="gp"><stop offset="0" class="gpa"/><stop offset="1" class="gpb"/></radialGradient></defs><rect x="6.5" y="6.5" width="407" height="266" rx="14" class="frame" stroke-width="1"/><g clip-path="url(#fc)"><ellipse cx="42" cy="0" rx="126" ry="237" fill="url(#gb)"/><ellipse cx="252" cy="0" rx="126" ry="237" fill="url(#gg)"/><ellipse cx="412" cy="279" rx="126" ry="237" fill="url(#gt)"/><ellipse cx="160" cy="293" rx="126" ry="237" fill="url(#gp)"/></g><text x="28" y="38" font-size="10.5" class="f ac" font-weight="700" letter-spacing="1.2">APP WEB · PWA</text><text x="28" y="66" font-size="19" class="f t1" font-weight="700" >TITULARES</text><text x="28" y="85" font-size="11.5" class="m t2" >WaltherMoraRivera/Titulares_futbol_app</text><circle cx="370" cy="52" r="20" fill="none" stroke-width="6" class="trk"/><circle cx="370" cy="52" r="20" fill="none" stroke="#1fa7c9" stroke-width="6" stroke-linecap="round" stroke-dasharray="115.3 125.7" transform="rotate(-90 370 52)"/><text x="370" y="55.8" font-size="10.5" class="f t1" font-weight="700" text-anchor="middle" >92%</text><text x="28" y="114" font-size="13" class="f t1" >Gestión de un equipo de fútbol amateur desde el</text><text x="28" y="133" font-size="13" class="f t1" >celular: plantilla, asistencia, formación con drag</text><text x="28" y="152" font-size="13" class="f t1" >&amp; drop y bitácora del partido en vivo.</text><rect x="28.0" y="187" width="80.7" height="24" rx="6" class="chip" stroke-width="1"/><text x="68.3" y="203.2" font-size="12" class="f t1" text-anchor="middle" >Next.js 16</text><rect x="114.7" y="187" width="80.7" height="24" rx="6" class="chip" stroke-width="1"/><text x="155.0" y="203.2" font-size="12" class="f t1" text-anchor="middle" >TypeScript</text><rect x="201.4" y="187" width="68.2" height="24" rx="6" class="chip" stroke-width="1"/><text x="235.5" y="203.2" font-size="12" class="f t1" text-anchor="middle" >Supabase</text><rect x="275.6" y="187" width="87.0" height="24" rx="6" class="chip" stroke-width="1"/><text x="319.0" y="203.2" font-size="12" class="f t1" text-anchor="middle" >Tailwind v4</text><line x1="28" y1="227" x2="392" y2="227" class="sep" stroke-width="1"/><circle cx="32" cy="247" r="4" class="d-prod"/><text x="44" y="251" font-size="12" class="f t1" >En producción · Vercel</text><text x="392" y="251" font-size="11.5" class="f t2" text-anchor="end" >51 commits · 28 sep</text><g clip-path="url(#fc)"><rect x="6.00" y="268" width="374.74" height="5" fill="#1fa7c9"/><rect x="380.24" y="268" width="20.20" height="5" fill="#336790"/><rect x="399.95" y="268" width="8.39" height="5" fill="#d4a72c"/><rect x="407.83" y="268" width="6.67" height="5" fill="#7b5ea7"/></g></svg>
