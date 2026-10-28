@@ -256,6 +256,18 @@ def lang_segments(langs, ignore):
     return [(k, v / total) for k, v in sorted(langs.items(), key=lambda kv: -kv[1])]
 
 
+def jpeg_size(raw):
+    """(ancho, alto) de un JPEG leyendo su marcador SOF, sin dependencias."""
+    i = 2
+    while i < len(raw):
+        marker = raw[i + 1]
+        length = int.from_bytes(raw[i + 2:i + 4], "big")
+        if 0xC0 <= marker <= 0xCF and marker not in (0xC4, 0xC8, 0xCC):
+            return int.from_bytes(raw[i + 7:i + 9], "big"), int.from_bytes(raw[i + 5:i + 7], "big")
+        i += 2 + length
+    raise ValueError("JPEG sin marcador SOF")
+
+
 def build_header(cfg, handle):
     """Texto a la izquierda; ilustración a la derecha, recortada al panel y con borde difuminado."""
     img_w, fade, shift = 330, 130, 50  # ancho visible, ancho del degradado, recorte por la izquierda
@@ -271,8 +283,10 @@ def build_header(cfg, handle):
     defs += '<linearGradient id="ng" x1="0" x2="1"><stop offset="0" class="n1"/><stop offset="1" class="n2"/></linearGradient>'
     body += panel(ph)
     if cfg.get("portrait"):
-        data = base64.b64encode((ROOT / cfg["portrait"]).read_bytes()).decode()
-        scaled_w = ph * 1024 / 572  # la ilustración se ajusta al alto del panel
+        raw = (ROOT / cfg["portrait"]).read_bytes()
+        data = base64.b64encode(raw).decode()
+        pw, phh = jpeg_size(raw)
+        scaled_w = ph * pw / phh  # la ilustración se ajusta al alto del panel
         shift = min(shift, scaled_w - img_w)
         defs += (
             f'<clipPath id="pc"><rect x="{PX}" y="{top}" width="{W - 2 * PX}" height="{ph}" rx="12"/></clipPath>'
