@@ -3,6 +3,7 @@
 .m{font-family:ui-monospace,SFMono-Regular,"SF Mono",Consolas,"Liberation Mono",monospace}
 .frame{fill:#f6f8fa;stroke:#bcd0e6}
 .panel{fill:#fff;fill-opacity:.72;stroke:#c3d4e8}
+.pline{fill:none;stroke:#c3d4e8}
 .tile{fill:#fff;fill-opacity:.85;stroke:#c3d4e8}
 .chip{fill:#eef3f9;stroke:#cdd9e6}
 .pill{fill:#fff;fill-opacity:.6;stroke:#7fb2f0}
@@ -20,6 +21,7 @@
 @media (prefers-color-scheme:dark){
 .frame{fill:#0d131b;stroke:#2a4a70}
 .panel{fill:#070a0f;fill-opacity:.78;stroke:#26466b}
+.pline{stroke:#26466b}
 .tile{fill:#090d13;fill-opacity:.9;stroke:#2b4f78}
 .chip{fill:#0e151e;stroke:#27415f}
 .pill{fill:#0b121b;fill-opacity:.7;stroke:#2f6bb3}

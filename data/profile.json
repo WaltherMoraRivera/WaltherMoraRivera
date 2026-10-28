@@ -3,6 +3,7 @@
   "name": "Walther Mora Rivera",
   "role": "Analista Programador · INACAP Apoquindo",
   "bio": "Desarrollo aplicaciones web, backend e IoT completas, de la base de datos a la interfaz, y las llevo a producción. Me importan el trabajo en equipo, la documentación y las pruebas.",
+  "portrait": "data/portrait.jpg",
   "pills": ["Python", "TypeScript", "Django", "Next.js", "MySQL", "IoT"],
   "languages_ignore": ["Batchfile", "Dockerfile"],
   "projects": [

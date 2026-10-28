@@ -46,6 +46,7 @@ STYLE = """<style>
 .m{font-family:ui-monospace,SFMono-Regular,"SF Mono",Consolas,"Liberation Mono",monospace}
 .frame{fill:#f6f8fa;stroke:#bcd0e6}
 .panel{fill:#fff;fill-opacity:.72;stroke:#c3d4e8}
+.pline{fill:none;stroke:#c3d4e8}
 .tile{fill:#fff;fill-opacity:.85;stroke:#c3d4e8}
 .chip{fill:#eef3f9;stroke:#cdd9e6}
 .pill{fill:#fff;fill-opacity:.6;stroke:#7fb2f0}
@@ -63,6 +64,7 @@ STYLE = """<style>
 @media (prefers-color-scheme:dark){
 .frame{fill:#0d131b;stroke:#2a4a70}
 .panel{fill:#070a0f;fill-opacity:.78;stroke:#26466b}
+.pline{stroke:#26466b}
 .tile{fill:#090d13;fill-opacity:.9;stroke:#2b4f78}
 .chip{fill:#0e151e;stroke:#27415f}
 .pill{fill:#0b121b;fill-opacity:.7;stroke:#2f6bb3}
@@ -245,16 +247,6 @@ def commit_count(repo):
     return int(m.group(1)) if m else len(body)
 
 
-def fetch_avatar(login):
-    req = urllib.request.Request(f"https://github.com/{login}.png?size=160", headers={"User-Agent": "profile-cards"})
-    try:
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            ctype = resp.headers.get_content_type()
-            return f"data:{ctype};base64," + base64.b64encode(resp.read()).decode()
-    except (urllib.error.URLError, OSError):
-        return None
-
-
 # ───────────────────────── tarjetas ─────────────────────────
 
 def lang_segments(langs, ignore):
@@ -264,33 +256,41 @@ def lang_segments(langs, ignore):
     return [(k, v / total) for k, v in sorted(langs.items(), key=lambda kv: -kv[1])]
 
 
-def build_header(cfg, avatar, handle):
-    bio = wrap(cfg["bio"], 13, W - M - 16 - 24 - 172)
-    pills, _ = layout_chips(cfg["pills"], 172, W - PX - 24, size=12.5, pad=14, gap=10)
+def build_header(cfg, handle):
+    """Texto a la izquierda; ilustración a la derecha, recortada al panel y con borde difuminado."""
+    img_w, fade, shift = 330, 130, 50  # ancho visible, ancho del degradado, recorte por la izquierda
+    box_x = W - PX - img_w
+    text_w = box_x + 40 - IX
+    bio = wrap(cfg["bio"], 13, text_w - 20)
+    pills, _ = layout_chips(cfg["pills"], IX, IX + text_w - 20, size=12.5, pad=12, gap=8)
     top = PX
     pills_y = top + 136 + (len(bio) - 1) * 19 + 14
     ph = pills_y + 28 + 22 - top
     h = top + ph + 16 + M
-    cx, cy, r = PX + 24 + 46, top + ph // 2, 46
-    if avatar:
-        pic = (
-            f'<clipPath id="av"><circle cx="{cx}" cy="{cy}" r="{r}"/></clipPath>'
-            f'<image href="{avatar}" x="{cx - r}" y="{cy - r}" width="{2 * r}" height="{2 * r}" clip-path="url(#av)"/>'
-        )
-    else:
-        initials = "".join(p[0] for p in cfg["name"].split()[:2]).upper()
-        pic = f'<circle cx="{cx}" cy="{cy}" r="{r}" class="chip"/>' + t(cx, cy + 10, initials, 28, "t2", "600", "middle")
     defs, body = shell(W, h)
     defs += '<linearGradient id="ng" x1="0" x2="1"><stop offset="0" class="n1"/><stop offset="1" class="n2"/></linearGradient>'
-    body += panel(ph).replace(f'y="{PX}.5"', f'y="{top}.5"')
-    body += pic + f'<circle cx="{cx}" cy="{cy}" r="{r + 1}" class="ring" stroke-width="2.5"/>'
-    body += f'<circle cx="{W - PX - 20}" cy="{top + 20}" r="4" class="c-blue"/>'
-    body += t(172, top + 38, "@" + handle.lower(), 12.5, "t2", "700", extra='letter-spacing="2.4"', mono=True)
-    body += t(172, top + 82, cfg["name"], 40, "", "800", extra='fill="url(#ng)"')
-    body += t(172, top + 108, cfg["role"], 16, "ac", "500")
+    body += panel(ph)
+    if cfg.get("portrait"):
+        data = base64.b64encode((ROOT / cfg["portrait"]).read_bytes()).decode()
+        scaled_w = ph * 1024 / 572  # la ilustración se ajusta al alto del panel
+        shift = min(shift, scaled_w - img_w)
+        defs += (
+            f'<clipPath id="pc"><rect x="{PX}" y="{top}" width="{W - 2 * PX}" height="{ph}" rx="12"/></clipPath>'
+            f'<linearGradient id="pf" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/>'
+            f'<stop offset="{fade / img_w:.2f}" stop-color="#fff" stop-opacity="1"/></linearGradient>'
+            f'<mask id="pm"><rect x="{box_x}" y="{top}" width="{img_w}" height="{ph}" fill="url(#pf)"/></mask>'
+        )
+        body += (
+            f'<g clip-path="url(#pc)"><image href="data:image/jpeg;base64,{data}" x="{box_x - shift:.0f}" '
+            f'y="{top}" width="{scaled_w:.0f}" height="{ph}" preserveAspectRatio="none" mask="url(#pm)"/></g>'
+        )
+        body += f'<rect x="{PX}.5" y="{top}.5" width="{W - 2 * PX - 1}" height="{ph - 1}" rx="12" class="pline" stroke-width="1"/>'
+    body += t(IX, top + 38, "@" + handle.lower(), 12.5, "t2", "700", extra='letter-spacing="2.4"', mono=True)
+    body += t(IX, top + 84, cfg["name"], 38, "", "800", extra='fill="url(#ng)"')
+    body += t(IX, top + 110, cfg["role"], 16, "ac", "500")
     for i, line in enumerate(bio):
-        body += t(172, top + 136 + i * 19, line, 13, "t2")
-    body += draw_chips(pills, pills_y, h=28, size=12.5, pill=True, tcls="ac")
+        body += t(IX, top + 138 + i * 19, line, 13, "t2")
+    body += draw_chips(pills, pills_y + 2, h=28, size=12.5, pill=True, tcls="ac")
     return svg(W, h, f"{cfg['name']}: {cfg['role']}", body, defs)
 
 
@@ -526,7 +526,7 @@ def main():
     max_rows = max(l[2] for l in layouts.values())
     h = card_height(max_lines, max_rows)
 
-    files = {"header.svg": build_header(cfg, fetch_avatar(login), login)}
+    files = {"header.svg": build_header(cfg, login)}
     for i, p in enumerate(cfg["projects"], 1):
         desc, chips, _ = layouts[p["repo"]]
         files[f"project-{i}.svg"] = build_project(p, infos[p["repo"]], (desc, chips, max_lines, max_rows, h))
