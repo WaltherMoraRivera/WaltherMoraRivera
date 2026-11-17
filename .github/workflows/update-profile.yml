@@ -1,18 +1,18 @@
-name: Actualizar tarjetas del perfil
+name: Refresh profile cards
 
-# Solo se ejecuta con el secreto PROFILE_TOKEN (token personal de solo lectura).
-# Sin él, GitHub entrega únicamente la actividad pública y las cifras bajarían mucho,
-# así que el trabajo se omite y las tarjetas se regeneran a mano: python scripts/generate.py
+# Runs only when the repository has a PROFILE_TOKEN secret (a read-only personal token).
+# Without it GitHub returns public activity only and the numbers would drop, so the job
+# skips itself; refresh by hand instead: python3 scripts/generate.py
 on:
   schedule:
-    - cron: "0 6 * * 1"   # cada lunes, 06:00 UTC
+    - cron: "0 6 * * 1"   # Mondays, 06:00 UTC
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  tarjetas:
+  cards:
     runs-on: ubuntu-latest
     env:
       HAS_TOKEN: ${{ secrets.PROFILE_TOKEN != '' }}
@@ -23,15 +23,15 @@ jobs:
         if: env.HAS_TOKEN == 'true'
         with:
           python-version: "3.12"
-      - name: Generar tarjetas
+      - name: Generate cards
         if: env.HAS_TOKEN == 'true'
         run: python scripts/generate.py
         env:
           GH_TOKEN: ${{ secrets.PROFILE_TOKEN }}
-      - name: Guardar cambios
+      - name: Commit changes
         if: env.HAS_TOKEN == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets
-          git diff --cached --quiet || (git commit -m "chore: actualizar tarjetas del perfil" && git push)
+          git add assets README.md
+          git diff --cached --quiet || (git commit -m "chore: refresh profile cards" && git push)
