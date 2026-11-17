@@ -96,10 +96,16 @@ ACCENTS = {  # (light, dark)
     "fedora": ("#3c6eb4", "#79a8ef"), "mint": ("#4a8a1f", "#8fd14f"), "cachyos": ("#0b8c7a", "#33d6bf"),
     # System colors of the other themes
     "vscode": ("#007acc", "#3794ff"), "win": ("#005fb8", "#4cc2ff"), "mac": ("#007aff", "#0a84ff"),
+    "ide": ("#3574f0", "#548af7"), "notebook": ("#d4561c", "#f0883e"),
 }
 DISTRO_HOSTS = {"ubuntu": "ubuntu", "arch": "archlinux", "debian": "debian", "fedora": "fedora",
                 "mint": "linuxmint", "cachyos": "cachyos"}
-DEFAULT_ACCENT = {"terminal": "cyan", "editor": "vscode", "win11": "win", "macos": "mac"}
+DEFAULT_ACCENT = {"terminal": "cyan", "editor": "vscode", "win11": "win", "macos": "mac", "ide": "ide",
+                  "vim": "green", "notebook": "notebook", "crt": "amber"}
+# Phosphor colors of the crt theme; any other accent uses its dark value
+CRT_PHOSPHOR = {"amber": "#ffb000", "green": "#41ff7a", "cyan": "#5ef1ff", "magenta": "#ff6ad5"}
+# The handheld theme draws everything with four greens
+HANDHELD = ("#0f380f", "#306230", "#8bac0f", "#9bbc0f")
 
 TERMINAL_STYLE = """<style>
 .f{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif}
@@ -213,22 +219,146 @@ MACOS_STYLE = """<style>
 .h0{fill:#2c2c2e}.h1,.h2,.h3,.h4{fill:@AD@}}
 </style>"""
 
-THEMES = ("terminal", "editor", "classic", "win11", "macos")
+# IDE theme: a full IDE with a main toolbar, a tool window strip and its own syntax colors.
+IDE_STYLE = """<style>
+.f{font-family:Inter,"Segoe UI",-apple-system,BlinkMacSystemFont,"Noto Sans",Helvetica,Arial,sans-serif}
+.m{font-family:"JetBrains Mono","Fira Code",ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace}
+.frame{fill:#ffffff;stroke:#dfe1e5}.bar{fill:#f7f8fa}.strip{fill:#f7f8fa}.icon{fill:none;stroke:#818594}
+.tile{fill:#f7f8fa;stroke:#ebecf0}.chip{fill:#f2f3f5;stroke:#e1e3e8}.pill{fill:none;stroke:@AL@}
+.track{fill:#ebecf0}.trk{stroke:#ebecf0}
+.t1{fill:#1e1f22}.t2{fill:#6c707e}.ac{fill:@AL@}.mt{fill:#ffffff}
+.kw{fill:#0033b3}.fn{fill:#00627a}.cm{fill:#8c8c8c;font-style:italic}.str{fill:#067d17}.ty{fill:#871094}.ln{fill:#aeb3c2}
+.c-blue{fill:#0033b3}.c-cyan{fill:#00627a}.c-purple{fill:#871094}.c-green{fill:#067d17}
+.sep{stroke:#ebecf0}.d-prod{fill:#208a3c}.d-proto{fill:#c27d04}
+.k1{fill:#e55765}.k2{fill:#e2a53a}.k3{fill:#5fb865}
+.h0{fill:#ebecf0}.h1,.h2,.h3,.h4{fill:@AL@}.h1{fill-opacity:.3}.h2{fill-opacity:.55}.h3{fill-opacity:.8}
+@media (prefers-color-scheme:dark){
+.frame{fill:#1e1f22;stroke:#393b40}.bar{fill:#2b2d30}.strip{fill:#2b2d30}.icon{stroke:#868a91}
+.tile{fill:#2b2d30;stroke:#393b40}.chip{fill:#2b2d30;stroke:#43454a}.pill{stroke:@AD@}
+.track{fill:#393b40}.trk{stroke:#393b40}
+.t1{fill:#bcbec4}.t2{fill:#7a7e85}.ac{fill:@AD@}.mt{fill:#1e1f22}
+.kw{fill:#cf8e6d}.fn{fill:#56a8f5}.cm{fill:#7a7e85}.str{fill:#6aab73}.ty{fill:#c77dbb}.ln{fill:#4b5059}
+.c-blue{fill:#56a8f5}.c-cyan{fill:#2aacb8}.c-purple{fill:#c77dbb}.c-green{fill:#6aab73}
+.sep{stroke:#393b40}.d-prod{fill:#5fb865}.d-proto{fill:#e2a53a}
+.h0{fill:#2b2d30}.h1,.h2,.h3,.h4{fill:@AD@}}
+</style>"""
+
+# Vim theme: a modal editor, status line with the mode, relative line numbers, markdown buffer.
+VIM_STYLE = """<style>
+.f{font-family:ui-monospace,SFMono-Regular,"SF Mono","JetBrains Mono",Consolas,"Liberation Mono",monospace}
+.m{font-family:ui-monospace,SFMono-Regular,"SF Mono","JetBrains Mono",Consolas,"Liberation Mono",monospace}
+.frame{fill:#fafaf7;stroke:#d5d5cc}.bar{fill:#e9e9e2}
+.tile{fill:#f2f2ec;stroke:#dcdcd2}.chip{fill:#f0f0e9;stroke:#d5d5cc}.pill{fill:none;stroke:@AL@}
+.track{fill:#e4e4dc}.trk{stroke:#e4e4dc}
+.t1{fill:#2b2b28}.t2{fill:#73736b}.ac{fill:@AL@}.mt{fill:#fafaf7}.ln{fill:#acaca2}
+.c-blue{fill:#2f6fa8}.c-cyan{fill:#2c7f6e}.c-purple{fill:#8a4fae}.c-green{fill:#8a6a12}
+.sep{stroke:#dcdcd2}.d-prod{fill:#4e8a1e}.d-proto{fill:#a86f00}
+.k1{fill:#c8493f}.k2{fill:#c99a2e}.k3{fill:#5d9a3a}
+.h0{fill:#e4e4dc}.h1,.h2,.h3,.h4{fill:@AL@}.h1{fill-opacity:.35}.h2{fill-opacity:.6}.h3{fill-opacity:.82}
+@media (prefers-color-scheme:dark){
+.frame{fill:#17171b;stroke:#2d2d34}.bar{fill:#25252c}
+.tile{fill:#1d1d22;stroke:#2d2d34}.chip{fill:#202026;stroke:#33333b}.pill{stroke:@AD@}
+.track{fill:#2a2a31}.trk{stroke:#2a2a31}
+.t1{fill:#d8d8d0}.t2{fill:#8a8a82}.ac{fill:@AD@}.mt{fill:#17171b}.ln{fill:#4c4c55}
+.c-blue{fill:#7fb4e6}.c-cyan{fill:#6fd0bb}.c-purple{fill:#c99ce6}.c-green{fill:#e3c16f}
+.sep{stroke:#2d2d34}.d-prod{fill:#a3d977}.d-proto{fill:#e3b25a}
+.h0{fill:#2a2a31}.h1,.h2,.h3,.h4{fill:@AD@}}
+</style>"""
+
+# Notebook theme: cells with execution counts, code input and output underneath.
+NOTEBOOK_STYLE = """<style>
+.f{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif}
+.m{font-family:"Source Code Pro",ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+.frame{fill:#ffffff;stroke:#e0e0e0}.bar{fill:#f5f5f5}.cell{fill:#f5f5f5;stroke:#e0e0e0}.sel{fill:#1976d2}
+.tile{fill:#ffffff;stroke:#e0e0e0}.chip{fill:#f5f5f5;stroke:#e0e0e0}.pill{fill:none;stroke:@AL@}
+.track{fill:#eeeeee}.trk{stroke:#eeeeee}
+.t1{fill:#212121}.t2{fill:#616161}.ac{fill:@AL@}.op{fill:#d84315}
+.kw{fill:#008000}.fn{fill:#0055aa}.str{fill:#ba2121}.cm{fill:#408080}
+.c-blue{fill:#1976d2}.c-cyan{fill:#00838f}.c-purple{fill:#7b1fa2}.c-green{fill:#388e3c}
+.sep{stroke:#e0e0e0}.d-prod{fill:#388e3c}.d-proto{fill:#f57c00}
+.k1{fill:#e53935}.k2{fill:#fbc02d}.k3{fill:#43a047}
+.h0{fill:#eeeeee}.h1,.h2,.h3,.h4{fill:@AL@}.h1{fill-opacity:.3}.h2{fill-opacity:.55}.h3{fill-opacity:.8}
+@media (prefers-color-scheme:dark){
+.frame{fill:#111111;stroke:#424242}.bar{fill:#212121}.cell{fill:#212121;stroke:#424242}.sel{fill:#42a5f5}
+.tile{fill:#1a1a1a;stroke:#424242}.chip{fill:#212121;stroke:#424242}.pill{stroke:@AD@}
+.track{fill:#303030}.trk{stroke:#303030}
+.t1{fill:#e0e0e0}.t2{fill:#9e9e9e}.ac{fill:@AD@}.op{fill:#ff8a65}
+.kw{fill:#81c784}.fn{fill:#64b5f6}.str{fill:#ef9a9a}.cm{fill:#80cbc4}
+.c-blue{fill:#64b5f6}.c-cyan{fill:#4dd0e1}.c-purple{fill:#ce93d8}.c-green{fill:#81c784}
+.sep{stroke:#424242}.d-prod{fill:#81c784}.d-proto{fill:#ffb74d}
+.h0{fill:#303030}.h1,.h2,.h3,.h4{fill:@AD@}}
+</style>"""
+
+# Handheld theme: a 90s handheld console screen. Four greens, the same on light and dark pages.
+HANDHELD_STYLE = """<style>
+.f,.m{font-family:"Press Start 2P",ui-monospace,"Lucida Console","Courier New",Consolas,monospace}
+rect{shape-rendering:crispEdges}
+.frame{fill:#9bbc0f;stroke:#0f380f}.bar{fill:#0f380f}
+.tile{fill:none;stroke:#0f380f}.chip{fill:#8bac0f;stroke:#306230}.pill{fill:none;stroke:#0f380f}
+.track{fill:#8bac0f}.trk{stroke:#8bac0f}
+.t1{fill:#0f380f}.t2{fill:#306230}.ac{fill:#0f380f}.mt{fill:#9bbc0f}
+.c-blue,.c-purple{fill:#0f380f}.c-cyan,.c-green{fill:#306230}
+.sep{stroke:#306230}.d-prod{fill:#0f380f}.d-proto{fill:#8bac0f;stroke:#0f380f}
+.k1,.k2,.k3{fill:#0f380f}
+.h0{fill:#8bac0f;fill-opacity:.55}.h1{fill:#8bac0f}.h2{fill:#306230;fill-opacity:.65}.h3{fill:#306230}.h4{fill:#0f380f}
+</style>"""
+
+# CRT theme: a phosphor screen with scan lines and glow. Dark on light and dark pages alike.
+CRT_STYLE = """<style>
+.f,.m{font-family:"VT323","IBM Plex Mono",ui-monospace,"Lucida Console","Courier New",Consolas,monospace}
+.frame{fill:#0b0a07;stroke:#2b2618}.bar{fill:#0b0a07}
+.tile{fill:@P@;fill-opacity:.05;stroke:@P@;stroke-opacity:.35}.chip{fill:@P@;fill-opacity:.06;stroke:@P@;stroke-opacity:.45}
+.pill{fill:none;stroke:@P@}
+.track{fill:@P@;fill-opacity:.15}.trk{stroke:@P@;stroke-opacity:.15}
+.t1{fill:@P@}.t2{fill:@P@;fill-opacity:.62}.ac{fill:@P@}.mt{fill:#0b0a07}
+.c-blue,.c-cyan,.c-purple,.c-green{fill:@P@}
+.sep{stroke:@P@;stroke-opacity:.3}.d-prod{fill:@P@}.d-proto{fill:@P@;fill-opacity:.45}
+.k1,.k2,.k3{fill:@P@}
+.h0{fill:@P@;fill-opacity:.08}.h1,.h2,.h3,.h4{fill:@P@}.h1{fill-opacity:.3}.h2{fill-opacity:.52}.h3{fill-opacity:.76}
+</style>"""
+
+THEMES = ("terminal", "editor", "classic", "win11", "macos", "ide", "vim", "notebook", "handheld", "crt")
 STYLES = {"terminal": TERMINAL_STYLE, "editor": EDITOR_STYLE, "classic": CLASSIC_STYLE,
-          "win11": WIN11_STYLE, "macos": MACOS_STYLE}
+          "win11": WIN11_STYLE, "macos": MACOS_STYLE, "ide": IDE_STYLE, "vim": VIM_STYLE,
+          "notebook": NOTEBOOK_STYLE, "handheld": HANDHELD_STYLE, "crt": CRT_STYLE}
 
 def style():
     light, dark = ACCENTS.get(ACCENT, ACCENTS["cyan"])
-    return STYLES[THEME].replace("@AL@", light).replace("@AD@", dark)
+    return STYLES[THEME].replace("@AL@", light).replace("@AD@", dark).replace("@P@", phosphor())
+
+
+def phosphor():
+    return CRT_PHOSPHOR.get(ACCENT) or ACCENTS.get(ACCENT, ACCENTS["amber"])[1]
 
 
 def term():
     return THEME == "terminal"
 
 
+def codey():
+    """Themes that write data as code: stack items as "strings", titles as functions."""
+    return THEME in ("editor", "ide")
+
+
 def mono():
     """Themes whose titles, numbers and labels use the monospace font."""
-    return THEME in ("terminal", "editor")
+    return THEME in ("terminal", "editor", "ide", "vim", "handheld", "crt")
+
+
+def retro():
+    """Fixed-palette themes drawn with square pixels and block progress bars."""
+    return THEME in ("handheld", "crt")
+
+
+LANG_RANK = {}  # language -> position in the language stack, for the fixed-palette themes
+
+
+def lang_color(name):
+    if THEME == "handheld":
+        return (HANDHELD[0], HANDHELD[1], "#5f7f12")[LANG_RANK.get(name, len(name)) % 3]
+    if THEME == "crt":
+        return phosphor()
+    return LANG_COLORS.get(name, "#8b949e")
 
 
 # ───────────────────────── helpers ─────────────────────────
@@ -239,6 +369,7 @@ def esc(s):
 
 def text_width(s, size, bold=False, mono=False):
     """Estimated width in px. Conservative: fonts differ between systems."""
+    mono = mono or THEME in ("vim", "handheld", "crt")  # their body font is monospace too
     return len(s) * size * (0.62 if mono else 0.6 if bold else 0.55)
 
 
@@ -280,6 +411,18 @@ def t(x, y, s, size=13, cls="t1", weight=None, anchor=None, extra="", mono=False
 
 
 def svg(w, h, title, body, defs=""):
+    if THEME == "crt":
+        defs += (
+            '<filter id="glow" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="1.4" result="b"/>'
+            '<feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'
+            '<pattern id="scan" width="4" height="3" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#000" fill-opacity=".35"/></pattern>'
+            '<radialGradient id="vig" cx=".5" cy=".5" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/>'
+            '<stop offset="1" stop-color="#000" stop-opacity=".55"/></radialGradient>'
+        )
+        fw, fh = w - 2 * M, h - 2 * M
+        body = (f'<g filter="url(#glow)">{body}</g><g clip-path="url(#fc)" pointer-events="none">'
+                f'<rect x="{M}" y="{M}" width="{fw}" height="{fh}" fill="url(#scan)"/>'
+                f'<rect x="{M}" y="{M}" width="{fw}" height="{fh}" fill="url(#vig)"/></g>')
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
         f'role="img" aria-label="{esc(title)}"><title>{esc(title)}</title>{style()}'
@@ -311,13 +454,25 @@ def wtitle(kind, human, repo=""):
     if THEME == "editor":
         return {"header": "README.md", "sig": "signal.ts", "lang": "languages.ts", "tool": "toolkit.ts",
                 "act": "activity.ts", "project": repo + "/README.md"}[kind]
+    if THEME == "ide":
+        return {"header": human, "sig": "Signal.kt", "lang": "Languages.kt", "tool": "Toolkit.kt",
+                "act": "Activity.kt", "project": repo}[kind]
+    if THEME == "vim":
+        return {"header": "README.md", "sig": "signal.md", "lang": "languages.md", "tool": "toolkit.md",
+                "act": "activity.md", "project": repo + "/README.md"}[kind]
+    if THEME == "notebook":
+        return {"header": "profile.ipynb", "sig": "signal.ipynb", "lang": "languages.ipynb",
+                "tool": "toolkit.ipynb", "act": "activity.ipynb", "project": repo + ".ipynb"}[kind]
+    if retro():
+        return (repo if kind == "project" else human).upper()
     return human
 
 
 def shell(w, h, title=""):
     """Window frame of the active theme, with its title bar. Returns (defs, body)."""
     fw, fh = w - 2 * M, h - 2 * M
-    rx = {"terminal": 10, "editor": 6, "classic": 0, "win11": 8, "macos": 10}[THEME]
+    rx = {"terminal": 10, "editor": 6, "classic": 0, "win11": 8, "macos": 10, "ide": 8, "vim": 6,
+          "notebook": 4, "handheld": 4, "crt": 18}[THEME]
     defs = f'<clipPath id="fc"><rect x="{M}" y="{M}" width="{fw}" height="{fh}" rx="{rx}"/></clipPath>'
     frame = f'<rect x="{M}.5" y="{M}.5" width="{fw - 1}" height="{fh - 1}" rx="{rx}" class="frame" stroke-width="1"/>'
     cy = M + BAR // 2
@@ -339,6 +494,63 @@ def shell(w, h, title=""):
         if w == W:  # line numbers in the gutter of full-width cards
             for n, y in enumerate(range(M + BAR + 26, h - M - 8, 21), 1):
                 body += t(M + 24, y, str(n), 10, "ln", anchor="end", mono=True)
+        return defs, body
+
+    if THEME == "ide":  # main toolbar: project, branch, run, window buttons; tool window strip
+        body = frame + bar_bg + bar_line
+        initials = "".join(word[0] for word in title.split()[:2]).upper() or "P"
+        body += f'<rect x="{M + 12}" y="{cy - 8}" width="16" height="16" rx="4" class="ac"/>'
+        body += t(M + 20, cy + 3.5, initials, 8, "mt", "700", anchor="middle")
+        body += t(M + 36, cy + 4, title, 12, "t1", "600")
+        body += t(M + 44 + text_width(title, 12, bold=True), cy + 4, "⎇ main", 11.5, "t2")
+        body += f'<path d="M{w - M - 152} {cy - 5}l8 5-8 5z" class="d-prod"/>'
+        for i, glyph in enumerate(("✕", "▢", "—")):
+            body += t(w - M - 18 - i * 36, cy + 4, glyph, 11, "t2", anchor="middle")
+        if w == W:
+            body += (f'<g clip-path="url(#fc)"><rect x="{M}" y="{M + BAR + 1}" width="26" height="{fh - BAR - 1}" class="strip"/></g>'
+                     f'<line x1="{M + 26}.5" y1="{M + BAR + 1}" x2="{M + 26}.5" y2="{h - M}" class="sep" stroke-width="1"/>')
+            for i in range(3):
+                body += f'<rect x="{M + 7}" y="{M + BAR + 12 + i * 26}" width="12" height="12" rx="3" class="icon" stroke-width="1.3"/>'
+        return defs, body
+
+    if THEME == "vim":  # status line on top: mode, file name, encoding; relative line numbers
+        body = frame + bar_bg + bar_line
+        body += (f'<g clip-path="url(#fc)"><rect x="{M}" y="{M}" width="74" height="{BAR}" class="ac"/></g>'
+                 + t(M + 37, cy + 4, "NORMAL", 11, "mt", "700", anchor="middle", mono=True))
+        body += t(M + 86, cy + 4, title, 11.5, "t1", "600", mono=True)
+        body += t(w - M - 12, cy + 4, "utf-8 · unix", 11, "t2", anchor="end", mono=True)
+        if w == W:
+            cur = 3
+            for n, y in enumerate(range(M + BAR + 26, h - M - 8, 21), 1):
+                num, cls = (str(n), "ac") if n == cur else (str(abs(n - cur)), "ln")
+                body += t(M + 26, y, num, 10, cls, "700" if n == cur else None, anchor="end", mono=True)
+        return defs, body
+
+    if THEME == "notebook":  # file name, toolbar glyphs, kernel status
+        body = frame + bar_bg + bar_line
+        body += t(M + 14, cy + 4, title, 11.5, "t1", "600", mono=True)
+        x = M + 26 + text_width(title, 11.5, mono=True)
+        for glyph in ("+", "✂", "⧉", "▶", "■", "↻") if w == W else ():
+            body += t(x, cy + 4, glyph, 12, "t2", anchor="middle")
+            x += 22
+        body += t(w - M - 30, cy + 4, "Python 3", 11, "t2", anchor="end")
+        body += f'<circle cx="{w - M - 18}" cy="{cy}" r="5" fill="none" class="sep" stroke-width="1.6"/>'
+        return defs, body
+
+    if THEME == "handheld":  # dark screen label, power light and two buttons
+        body = frame.replace('stroke-width="1"', 'stroke-width="2"')
+        body += f'<g clip-path="url(#fc)"><rect x="{M}" y="{M}" width="{fw}" height="{BAR}" class="bar"/></g>'
+        body += f'<rect x="{M + 12}" y="{cy - 4}" width="8" height="8" class="mt"/>'
+        body += t(M + 30, cy + 4, title, 11, "mt", "700", mono=True, extra='letter-spacing="1.5"')
+        for i, glyph in enumerate(("A", "B")):
+            bx = w - M - 20 - i * 24
+            body += f'<circle cx="{bx}" cy="{cy}" r="8" class="mt"/>' + t(bx, cy + 3.5, glyph, 9, "t1", "700", anchor="middle", mono=True)
+        return defs, body
+
+    if THEME == "crt":  # screen label and a terminal number
+        body = frame + bar_line
+        body += t(M + 18, cy + 5, "▌" + title, 14, "ac", "700", mono=True, extra='letter-spacing="1"')
+        body += t(w - M - 18, cy + 5, "TTY1", 14, "t2", anchor="end", mono=True)
         return defs, body
 
     if THEME == "classic":
@@ -373,6 +585,33 @@ def titles(top, title, subtitle, cmd, ident):
             code(IX, top + 40, [("export function ", "kw"), (ident, "fn"), ("() {", "t1")])
             + t(IX, top + 62, f"// {title} · {subtitle}", 12, "cm", mono=True)
         )
+    if THEME == "ide":
+        return (
+            code(IX, top + 40, [("fun ", "kw"), (ident, "fn"), ("() {", "t1")])
+            + t(IX, top + 62, f"// {title} · {subtitle}", 12, "cm", mono=True)
+        )
+    if THEME == "vim":
+        return (
+            t(IX, top + 40, "##", 14, "ac", "700", mono=True) + t(IX + 26, top + 40, title, 14, "t1", "700", mono=True)
+            + t(IX, top + 62, f"> {subtitle}", 12, "t2", mono=True)
+        )
+    if THEME == "notebook":
+        n = {"profileSignal": 1, "languageStack": 2, "toolkit": 3, "contributions": 4}.get(ident, 1)
+        cx = IX + 44
+        return (
+            f'<rect x="{IX - 14}" y="{top + 21}" width="3" height="50" class="sel"/>'
+            + t(IX, top + 40, f"[{n}]:", 12, "t2", mono=True)
+            + f'<rect x="{cx}.5" y="{top + 23}.5" width="{W - IX - cx - 1}" height="25" rx="2" class="cell" stroke-width="1"/>'
+            + code(cx + 10, top + 40, [("profile", "t1"), (".", "t1"), (ident, "fn"), ("()", "t1")], 12.5, "400")
+            + t(IX, top + 66, f"[{n}]:", 12, "op", mono=True)
+            + t(cx + 10, top + 66, f"{title} · {subtitle}", 12.5, "t2", "600")
+        )
+    if retro():
+        return (
+            t(IX, top + 40, ("▶ " if THEME == "handheld" else "> ") + title.upper(), 15 if THEME == "handheld" else 17,
+              "ac", "700", mono=True, extra='letter-spacing="1"')
+            + t(IX, top + 62, subtitle, 12 if THEME == "handheld" else 15, "t2", mono=True)
+        )
     if THEME == "classic":
         return t(IX, top + 40, title, 16, "t1", "700") + t(IX, top + 60, subtitle, 12, "t2")
     weight = "600" if THEME == "win11" else "700"
@@ -394,7 +633,8 @@ def layout_chips(labels, x0, max_x, size=12, pad=9, gap=6, quoted=False):
 
 def draw_chips(items, y0, h=24, row_gap=6, size=12, pill=False, tcls="t1"):
     parts = []
-    rx = {"terminal": 4, "editor": 3, "classic": 0, "win11": 4, "macos": h / 2}[THEME]
+    rx = {"terminal": 4, "editor": 3, "classic": 0, "win11": 4, "macos": h / 2, "ide": 4, "vim": 2,
+          "notebook": 3, "handheld": 0, "crt": 0}[THEME]
     for label, x, row, w in items:
         y = y0 + row * (h + row_gap)
         text, cls_text = label, tcls
@@ -403,10 +643,10 @@ def draw_chips(items, y0, h=24, row_gap=6, size=12, pill=False, tcls="t1"):
             cls_text = "t1"
         else:
             parts.append(f'<rect x="{x:.1f}" y="{y}" width="{w:.1f}" height="{h}" rx="{rx}" class="{"pill" if pill else "chip"}" stroke-width="1"/>')
-            if THEME == "editor" and not pill:
+            if codey() and not pill:
                 text, cls_text = f'"{label}"', "str"
         parts.append(t(f"{x + w / 2:.1f}", y + h / 2 + 4.2, text, size, cls_text,
-                       "600" if pill else None, anchor="middle", mono=THEME == "editor" and not pill))
+                       "600" if pill else None, anchor="middle", mono=(codey() and not pill) or THEME in ("vim", "crt")))
     return "".join(parts)
 
 
@@ -414,8 +654,9 @@ def tile(x, y, w, h):
     """Background of a stat tile."""
     if THEME == "classic":
         return f'<rect x="{x:.0f}" y="{y}" width="{w:.0f}" height="{h}" class="tile"/>' + bevel(round(x), y, round(w), h, raised=False)
-    rx = {"terminal": 6, "editor": 3, "win11": 6, "macos": 10}[THEME]
-    return f'<rect x="{x + 0.5:.1f}" y="{y + 0.5}" width="{w:.1f}" height="{h}" rx="{rx}" class="tile" stroke-width="1"/>'
+    rx = {"terminal": 6, "editor": 3, "win11": 6, "macos": 10, "ide": 6, "vim": 2, "notebook": 3, "handheld": 0, "crt": 3}[THEME]
+    sw = 2 if THEME == "handheld" else 1
+    return f'<rect x="{x + 0.5:.1f}" y="{y + 0.5}" width="{w:.1f}" height="{h}" rx="{rx}" class="tile" stroke-width="{sw}"/>'
 
 
 def milestone(v):
@@ -426,23 +667,23 @@ def milestone(v):
 
 
 def bar(x, y, w, h, frac, cls=None, color=None):
-    """Progress bar: segmented blocks (terminal, classic), flat (editor) or rounded (win11, macos)."""
+    """Progress bar: segmented blocks (terminal, classic, retro), flat (editor, vim, notebook) or rounded."""
     frac = min(1, max(frac, 0.03))
     fill = f'class="{cls}"' if cls else f'fill="{color}"'
-    if THEME in ("terminal", "classic"):
+    if THEME in ("terminal", "classic") or retro():
         inner = ""
         if THEME == "classic":  # sunken white trough, blocks inside
             inner = f'<rect x="{x:.1f}" y="{y}" width="{w:.1f}" height="{h}" class="track"/>' + bevel(round(x), y, round(w), h, raised=False)
             x, y, w, h = x + 2, y + 2, w - 4, h - 4
-        n, gap = 24 if term() else 20, 2
+        n, gap = 20 if THEME == "classic" else 24, 2
         seg = (w - gap * (n - 1)) / n
         on = max(1, round(frac * n))
         return inner + "".join(
             f'<rect x="{x + i * (seg + gap):.1f}" y="{y}" width="{seg:.1f}" height="{h}" rx="{1 if term() else 0}" '
-            + (fill if i < on else ('class="track"' if term() else 'fill="none"')) + "/>"
+            + (fill if i < on else ('fill="none"' if THEME == "classic" else 'class="track"')) + "/>"
             for i in range(n)
         )
-    r = 1 if THEME == "editor" else h / 2
+    r = 1 if THEME in ("editor", "vim", "notebook") else h / 2
     return (
         f'<rect x="{x:.1f}" y="{y}" width="{w:.1f}" height="{h}" rx="{r}" class="track"/>'
         f'<rect x="{x:.1f}" y="{y}" width="{w * frac:.1f}" height="{h}" rx="{r}" {fill}/>'
@@ -454,7 +695,7 @@ def donut(cx, cy, r, frac, color):
     return (
         f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke-width="6" class="trk"/>'
         f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{color}" stroke-width="6" '
-        f'stroke-linecap="{"butt" if THEME in ("terminal", "editor", "classic") else "round"}" '
+        f'stroke-linecap="{"butt" if THEME in ("terminal", "editor", "classic", "vim") or retro() else "round"}" '
         f'stroke-dasharray="{c * frac:.1f} {c:.1f}" transform="rotate(-90 {cx} {cy})"/>'
         + t(cx, cy + 3.8, f"{frac * 100:.0f}%", 10.5, "t1", "700", "middle")
     )
@@ -582,8 +823,23 @@ def build_header(cfg, handle):
     if fetch:
         ph = max(ph, 52 + len(fetch) * 21 + 36)
     h = top + ph + 16 + M
-    header_title = {"terminal": f"{handle.lower()}@{HOST}: ~", "classic": f"{S['about']} {cfg['name']}"}.get(THEME, cfg["name"])
+    header_title = {"terminal": f"{handle.lower()}@{HOST}: ~", "classic": f"{S['about']} {cfg['name']}",
+                    "ide": handle.lower(), "handheld": "PLAYER 1"}.get(THEME, cfg["name"])
     defs, body = shell(W, h, title=wtitle("header", header_title))
+    recolor = ""
+    if pic and retro():  # luminance mapped to the theme's palette
+        if THEME == "handheld":
+            chan = list(zip(*[[int(c[i:i + 2], 16) / 255 for i in (1, 3, 5)] for c in HANDHELD]))
+            funcs = "".join(f'<feFunc{ch} type="discrete" tableValues="{" ".join(f"{v:.3f}" for v in chan[k])}"/>'
+                            for k, ch in enumerate("RGB"))
+            defs += ('<filter id="pal" color-interpolation-filters="sRGB"><feColorMatrix type="saturate" values="0"/>'
+                     f'<feComponentTransfer>{funcs}</feComponentTransfer></filter>')
+        else:
+            r, g, b = (int(phosphor()[i:i + 2], 16) / 255 for i in (1, 3, 5))
+            rows = " ".join(f"{.2126 * c:.3f} {.7152 * c:.3f} {.0722 * c:.3f} 0 0" for c in (r, g, b))
+            defs += (f'<filter id="pal" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" '
+                     f'values="{rows} 0 0 0 1 0"/></filter>')
+        recolor = ' filter="url(#pal)"'
     if cutout:
         raw, mime, pw, phh = pic
         img_w = side_w
@@ -608,12 +864,12 @@ def build_header(cfg, handle):
             body += (
                 f"<style>.sp{{animation:sp {total}ms steps(1,end) infinite}}@keyframes sp{{{''.join(keys)}}}"
                 "@media (prefers-reduced-motion:reduce){.sp{animation:none}}</style>"
-                f'<g clip-path="url(#fc)"><g clip-path="url(#sc)"><image class="sp" href="{href}" x="{x}" y="{y:.2f}" '
+                f'<g clip-path="url(#fc)"><g clip-path="url(#sc)"{recolor}><image class="sp" href="{href}" x="{x}" y="{y:.2f}" '
                 f'width="{img_w * len(durs)}" height="{img_h:.2f}" preserveAspectRatio="none"/></g></g>'
             )
         else:
             body += (
-                f'<g clip-path="url(#fc)"><image href="{href}" '
+                f'<g clip-path="url(#fc)"{recolor}><image href="{href}" '
                 f'x="{x}" y="{y:.0f}" width="{img_w}" height="{img_h:.0f}"/></g>'
             )
     elif pic:
@@ -629,7 +885,7 @@ def build_header(cfg, handle):
             f'<mask id="pm"><rect x="{box_x}" y="{iy}" width="{img_w + 40}" height="{ih}" fill="url(#pf)"/></mask>'
         )
         body += (
-            f'<g clip-path="url(#fc)"><g clip-path="url(#pc)"><image href="data:{mime};base64,{base64.b64encode(raw).decode()}" '
+            f'<g clip-path="url(#fc)"{recolor}><g clip-path="url(#pc)"><image href="data:{mime};base64,{base64.b64encode(raw).decode()}" '
             f'x="{box_x - shift:.0f}" y="{iy}" width="{scaled_w:.0f}" height="{ih}" preserveAspectRatio="none" mask="url(#pm)"/></g></g>'
         )
     elif fetch:
@@ -653,6 +909,30 @@ def build_header(cfg, handle):
         body += t(IX, top + 40, "// whoami", 13, "cm", mono=True)
         body += t(IX, top + 86, cfg["name"], 36, "fn", "700", mono=True)
         body += t(IX, top + 112, f'"{cfg["role"]}"', 14, "str", mono=True)
+    elif THEME == "ide":
+        body += t(IX, top + 40, "/** whoami */", 13, "cm", mono=True)
+        body += t(IX, top + 86, cfg["name"], 36, "fn", "700", mono=True)
+        body += t(IX, top + 112, f'"{cfg["role"]}"', 14, "str", mono=True)
+    elif THEME == "vim":
+        body += t(IX, top + 40, ":e README.md", 13, "t2", "700", mono=True)
+        body += t(IX, top + 86, cfg["name"], name_size, "ac", "800", mono=True)
+        body += f'<rect x="{IX}" y="{top + 98}" width="9" height="18" class="ac" fill-opacity=".85"/>'
+        body += t(IX, top + 112, cfg["role"], 15, "t1", "600", mono=True)
+    elif THEME == "notebook":
+        body += t(IX, top + 40, "[*]:", 12.5, "t2", mono=True) + t(IX + 40, top + 40, "%whoami", 12.5, "kw", "700", mono=True)
+        body += t(IX, top + 84, cfg["name"], 36, "t1", "700")
+        body += t(IX, top + 110, cfg["role"], 15, "ac", "600")
+    elif THEME == "handheld":
+        body += t(IX, top + 40, "▶ START", 12.5, "t2", "700", mono=True, extra='letter-spacing="2"')
+        body += t(IX, top + 84, cfg["name"], 32, "t1", "800", mono=True)
+        body += t(IX, top + 110, cfg["role"], 14, "ac", "700", mono=True)
+    elif THEME == "crt":
+        body += t(IX, top + 40, "READY.", 16, "t2", mono=True)
+        # the cursor is a tspan, so it follows the name whatever font the viewer has
+        name = t(IX, top + 86, cfg["name"], 40, "ac", "700", mono=True)
+        body += name[:-7] + ('<tspan>█<animate attributeName="opacity" values="1;1;0;0" dur="1.1s" '
+                             'repeatCount="indefinite"/></tspan></text>')
+        body += t(IX, top + 112, cfg["role"], 17, "t1", mono=True)
     elif THEME == "classic":
         body += t(IX, top + 82, cfg["name"], 32, "t1", "700")
         body += t(IX, top + 110, cfg["role"], 15, "ac", "700")
@@ -661,7 +941,8 @@ def build_header(cfg, handle):
         body += t(IX, top + 84, cfg["name"], 36, "t1", "600" if THEME == "win11" else "700")
         body += t(IX, top + 110, cfg["role"], 15, "ac", "600")
     for i, line in enumerate(bio):
-        body += t(IX, top + 140 + i * 19, line, 13, "t1" if THEME == "classic" else "t2")
+        body += t(IX, top + 140 + i * 19, line, 14 if THEME == "crt" else 13, "t1" if THEME in ("classic", "handheld", "crt") else "t2",
+                  mono=THEME in ("vim", "crt"))
     body += draw_chips(pills, pills_y + 2, h=28, row_gap=6, size=12.5, pill=True, tcls="ac")
     return svg(W, h, f"{cfg['name']}: {cfg['role']}", body, defs)
 
@@ -672,7 +953,7 @@ HOST = "github"  # host in the terminal title bar; a distro accent sets its own
 
 def project_layout(p, inner):
     desc = wrap(p["desc"], 13, inner)
-    chips, rows = layout_chips(p["stack"], M + 22, M + 22 + inner, quoted=THEME == "editor")
+    chips, rows = layout_chips(p["stack"], M + 22, M + 22 + inner, quoted=codey())
     return desc, chips, rows
 
 
@@ -688,11 +969,11 @@ def build_project(p, info, layout):
     y0 = M + OY
     defs, body = shell(CARD_W, h, title=wtitle("project", p["title"], p["repo"].split("/")[1]))
     body += t(pad, y0 + 32, p["label"], 10.5, "ac", "700", extra='letter-spacing="1.2"')
-    body += t(pad, y0 + 60, p["title"], 19, "fn" if THEME == "editor" else "t1", "700", mono=mono())
+    body += t(pad, y0 + 60, p["title"], 19, "fn" if codey() else "t1", "700", mono=mono())
     body += t(pad, y0 + 79, p["repo"], 11.5, "t2", mono=True)
     if info["bar"]:
         top_lang, _, w = info["bar"][0]
-        body += donut(CARD_W - pad - 22, y0 + 46, 20, w / (CARD_W - 2 * M), LANG_COLORS.get(top_lang, "#8b949e"))
+        body += donut(CARD_W - pad - 22, y0 + 46, 20, w / (CARD_W - 2 * M), lang_color(top_lang))
     y = y0 + 108
     for line in desc_lines:
         body += t(pad, y, line, 13, "t1")
@@ -709,7 +990,7 @@ def build_project(p, info, layout):
     body += (
         '<g clip-path="url(#fc)">'
         + "".join(
-            f'<rect x="{x:.2f}" y="{bar_y}" width="{w + 0.5:.2f}" height="5" fill="{LANG_COLORS.get(n, "#8b949e")}"/>'
+            f'<rect x="{x:.2f}" y="{bar_y}" width="{w + 0.5:.2f}" height="5" fill="{lang_color(n)}"/>'
             for n, x, w in info["bar"]
         )
         + "</g>"
@@ -728,7 +1009,8 @@ def build_profile_signal(tiles, today):
     for i, (label, value, color) in enumerate(tiles):
         x, y = IX + i * (tw + gap), top + 78
         body += tile(x, y, tw, 104)
-        body += t(x + 18, y + 28, label.upper(), 11, "t2", "700", extra='letter-spacing="1"', mono=mono())
+        body += t(x + 18, y + 28, label.upper(), 10.5 if retro() else 11, "t2", "700",
+                  extra=f'letter-spacing="{0.4 if mono() else 1}"', mono=mono())
         weight = "700" if THEME in ("win11", "macos") else "800"
         body += t(x + 18, y + 70, str(value), 36, color, weight, mono=mono())
         body += bar(x + 18, y + 84, tw - 36, 8, value / milestone(value), cls=color)
@@ -746,7 +1028,7 @@ def build_languages(segments, ignored):
     bx = IX + 200
     for i, (name, frac) in enumerate(top_n):
         y = top + 92 + i * 32
-        color = LANG_COLORS.get(name, "#8b949e")
+        color = lang_color(name)
         body += f'<circle cx="{IX + 6}" cy="{y - 4}" r="5" fill="{color}"/>'
         body += t(IX + 22, y, LANG_LABELS.get(name, name), 13.5, "t1", "700", mono=mono())
         body += t(IX + 168, y, f"{frac * 100:.0f}%", 13.5, "", "800", anchor="end", extra=f'fill="{color}"', mono=mono())
@@ -760,7 +1042,7 @@ def build_toolkit(groups):
     y = top + 84
     rows = []
     for g in groups:
-        chips, n = layout_chips(g["items"], x0 + label_w, right, quoted=THEME == "editor")
+        chips, n = layout_chips(g["items"], x0 + label_w, right, quoted=codey())
         block_h = n * 30 - 6
         rows.append((g["label"], chips, y, block_h))
         y += block_h + 18
@@ -769,7 +1051,7 @@ def build_toolkit(groups):
     defs, body = shell(W, h, title=wtitle("tool", S["tool_title"]))
     body += titles(top, S["tool_title"], S["tool_sub"], S["tool_cmd"], "toolkit")
     for i, (label, chips, ytop, block_h) in enumerate(rows):
-        label_cls = {"classic": "t1", "editor": "ty"}.get(THEME, "ac")
+        label_cls = {"classic": "t1", "editor": "ty", "ide": "ty"}.get(THEME, "ac")
         body += t(x0, ytop + 16, label, 12.5, label_cls, "700", mono=mono())
         body += draw_chips(chips, ytop)
         if i < len(rows) - 1:
@@ -778,7 +1060,7 @@ def build_toolkit(groups):
     return svg(W, h, f"{S['tool_title']}: " + "; ".join(f"{g['label']}: {', '.join(g['items'])}" for g in groups), body, defs)
 
 
-CELL_RX = {"terminal": 1.5, "editor": 1.5, "classic": 0}  # heatmap cell corners
+CELL_RX = {"terminal": 1.5, "editor": 1.5, "classic": 0, "vim": 1, "ide": 2, "handheld": 0, "crt": 0}  # heatmap cell corners
 
 
 def level(n, mx):
@@ -799,7 +1081,7 @@ def build_consistency(weeks, total):
     body += t(lx, top + 40, S["more"], 11.5, "t2", anchor="end")
     for lv in range(4, -1, -1):
         lx -= 14 + (len(S["more"]) * 7 if lv == 4 else 0)
-        body += f'<rect x="{lx}" y="{top + 31}" width="11" height="11" rx="2.5" class="h{lv}"/>'
+        body += f'<rect x="{lx}" y="{top + 31}" width="11" height="11" rx="{CELL_RX.get(THEME, 2.5)}" class="h{lv}"/>'
     body += t(lx - 6, top + 40, S["less"], 11.5, "t2", anchor="end")
     cell, gap, y0 = 11, 3, top + 82
     x0 = IX + (IW - (len(weeks) * (cell + gap) - gap)) // 2
@@ -911,7 +1193,7 @@ def main():
     THEME = cfg.get("theme", "terminal")
     if THEME not in THEMES:
         sys.exit(f"Unknown theme {THEME!r}; use one of: {', '.join(THEMES)}")
-    ACCENT = cfg.get("accent") or DEFAULT_ACCENT.get(THEME, "cyan")
+    ACCENT = cfg.get("accent") or DEFAULT_ACCENT.get(THEME, "cyan")  # classic and handheld ignore it
     if ACCENT not in ACCENTS:
         sys.exit(f"Unknown accent {ACCENT!r}; use one of: {', '.join(ACCENTS)}")
     HOST = cfg.get("host") or DISTRO_HOSTS.get(ACCENT, "github")
@@ -940,6 +1222,7 @@ def main():
         for k, v in langs.items():
             totals[k] = totals.get(k, 0) + v
     segments = lang_segments(totals, ignore)
+    LANG_RANK.update({name: i for i, (name, _) in enumerate(segments)})
     ignored = [k for k in sorted(ignore) if k in totals]
 
     infos, layouts = {}, {}
