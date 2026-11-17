@@ -2,7 +2,6 @@
 .f{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif}
 .m{font-family:ui-monospace,SFMono-Regular,"SF Mono","JetBrains Mono",Consolas,"Liberation Mono",monospace}
 .frame{fill:#fbfbf8;stroke:#d6d3c9}.bar{fill:#efede6}
-.panel{fill:none;stroke:none}.pline{fill:none;stroke:none}
 .tile{fill:#f4f2ec;stroke:#dcd8cc}
 .chip{fill:#f1efe8;stroke:#d6d3c9}
 .pill{fill:none;stroke:#0b7fa8}
