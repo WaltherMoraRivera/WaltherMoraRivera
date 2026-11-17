@@ -19,4 +19,6 @@
 
 <img src="assets/consistency-signal.svg" width="100%" alt="Actividad de contribuciones">
 
+<sub>¿Quieres un perfil como este? Créalo con <a href="https://github.com/WaltherMoraRivera/github-profile-readme-generator">github-profile-readme-generator</a>.</sub>
+
 <sub>Las tarjetas se generan con <a href="scripts/generate.py">scripts/generate.py</a> con datos de la API de GitHub.</sub>
