@@ -97,11 +97,13 @@ ACCENTS = {  # (light, dark)
     # System colors of the other themes
     "vscode": ("#007acc", "#3794ff"), "win": ("#005fb8", "#4cc2ff"), "mac": ("#007aff", "#0a84ff"),
     "ide": ("#3574f0", "#548af7"), "notebook": ("#d4561c", "#f0883e"),
+    "browser": ("#1a73e8", "#8ab4f8"), "sql": ("#00758f", "#4fb3d9"), "git": ("#c7401b", "#f1643f"),
 }
 DISTRO_HOSTS = {"ubuntu": "ubuntu", "arch": "archlinux", "debian": "debian", "fedora": "fedora",
                 "mint": "linuxmint", "cachyos": "cachyos"}
 DEFAULT_ACCENT = {"terminal": "cyan", "editor": "vscode", "win11": "win", "macos": "mac", "ide": "ide",
-                  "vim": "green", "notebook": "notebook", "crt": "amber"}
+                  "vim": "green", "notebook": "notebook", "crt": "amber", "browser": "browser", "sql": "sql",
+                  "git": "git"}
 # Phosphor colors of the crt theme; any other accent uses its dark value
 CRT_PHOSPHOR = {"amber": "#ffb000", "green": "#41ff7a", "cyan": "#5ef1ff", "magenta": "#ff6ad5"}
 # The handheld theme draws everything with four greens
@@ -317,10 +319,83 @@ CRT_STYLE = """<style>
 .h0{fill:@P@;fill-opacity:.08}.h1,.h2,.h3,.h4{fill:@P@}.h1{fill-opacity:.3}.h2{fill-opacity:.52}.h3{fill-opacity:.76}
 </style>"""
 
-THEMES = ("terminal", "editor", "classic", "win11", "macos", "ide", "vim", "notebook", "handheld", "crt")
+# Browser theme: a browser window with an address bar; headings highlighted like the element inspector.
+BROWSER_STYLE = """<style>
+.f{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans",Helvetica,Arial,sans-serif}
+.m{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+.frame{fill:#ffffff;stroke:#dadce0}.bar{fill:#f1f3f4}.field{fill:#ffffff;stroke:#dadce0}
+.tile{fill:#f8f9fa;stroke:#e8eaed}.chip{fill:#f1f3f4;stroke:#dadce0}.pill{fill:none;stroke:@AL@}
+.track{fill:#e8eaed}.trk{stroke:#e8eaed}
+.t1{fill:#202124}.t2{fill:#5f6368}.ac{fill:@AL@}
+.insp{fill:@AL@;fill-opacity:.08;stroke:@AL@}.tip{fill:#3c4043}.tipt{fill:#ffffff}.lk{fill:none;stroke:#5f6368}
+.c-blue{fill:#1a73e8}.c-cyan{fill:#12858a}.c-purple{fill:#9334e6}.c-green{fill:#188038}
+.sep{stroke:#e8eaed}.d-prod{fill:#188038}.d-proto{fill:#e37400}
+.k1{fill:#ea4335}.k2{fill:#fbbc04}.k3{fill:#34a853}
+.h0{fill:#ebedf0}.h1,.h2,.h3,.h4{fill:@AL@}.h1{fill-opacity:.3}.h2{fill-opacity:.55}.h3{fill-opacity:.8}
+@media (prefers-color-scheme:dark){
+.frame{fill:#202124;stroke:#3c4043}.bar{fill:#35363a}.field{fill:#202124;stroke:#5f6368}
+.tile{fill:#292a2d;stroke:#3c4043}.chip{fill:#303134;stroke:#5f6368}.pill{stroke:@AD@}
+.track{fill:#3c4043}.trk{stroke:#3c4043}
+.t1{fill:#e8eaed}.t2{fill:#9aa0a6}.ac{fill:@AD@}
+.insp{fill:@AD@;stroke:@AD@}.tip{fill:#e8eaed}.tipt{fill:#202124}.lk{stroke:#9aa0a6}
+.c-blue{fill:#8ab4f8}.c-cyan{fill:#78d9ec}.c-purple{fill:#c58af9}.c-green{fill:#81c995}
+.sep{stroke:#3c4043}.d-prod{fill:#81c995}.d-proto{fill:#fcad70}
+.h0{fill:#303134}.h1,.h2,.h3,.h4{fill:@AD@}}
+</style>"""
+
+# SQL theme: a database console. Headings are queries, cards are their results.
+SQL_STYLE = """<style>
+.f,.m{font-family:ui-monospace,SFMono-Regular,"SF Mono","JetBrains Mono",Consolas,"Liberation Mono",monospace}
+.frame{fill:#fbfcfd;stroke:#d0d7de}.bar{fill:#eef1f4}
+.tile{fill:#f6f8fa;stroke:#d0d7de}.chip{fill:#f6f8fa;stroke:#d0d7de}.pill{fill:none;stroke:@AL@}
+.track{fill:#e5e8eb}.trk{stroke:#e5e8eb}.db{fill:none;stroke:@AL@}
+.t1{fill:#1f2328}.t2{fill:#656d76}.ac{fill:@AL@}.kw{fill:#0550ae}.cm{fill:#6e7781}
+.c-blue{fill:#0550ae}.c-cyan{fill:#1b7c83}.c-purple{fill:#8250df}.c-green{fill:#9a6700}
+.sep{stroke:#d0d7de}.d-prod{fill:#1a7f37}.d-proto{fill:#9a6700}
+.k1{fill:#cf222e}.k2{fill:#bf8700}.k3{fill:#1a7f37}
+.h0{fill:#e5e8eb}.h1,.h2,.h3,.h4{fill:@AL@}.h1{fill-opacity:.3}.h2{fill-opacity:.55}.h3{fill-opacity:.8}
+@media (prefers-color-scheme:dark){
+.frame{fill:#0f1419;stroke:#2b3440}.bar{fill:#161d25}
+.tile{fill:#131a21;stroke:#2b3440}.chip{fill:#18202a;stroke:#2b3440}.pill{stroke:@AD@}
+.track{fill:#1f2731}.trk{stroke:#1f2731}.db{stroke:@AD@}
+.t1{fill:#d0d7de}.t2{fill:#8b949e}.ac{fill:@AD@}.kw{fill:#79c0ff}.cm{fill:#6e7681}
+.c-blue{fill:#79c0ff}.c-cyan{fill:#56d4dd}.c-purple{fill:#d2a8ff}.c-green{fill:#e3b341}
+.sep{stroke:#2b3440}.d-prod{fill:#56d364}.d-proto{fill:#e3b341}
+.h0{fill:#1f2731}.h1,.h2,.h3,.h4{fill:@AD@}}
+</style>"""
+
+# Git theme: commit graph lanes in the gutter, headings as commits with hash and refs.
+GIT_STYLE = """<style>
+.f{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif}
+.m{font-family:ui-monospace,SFMono-Regular,"SF Mono","JetBrains Mono",Consolas,"Liberation Mono",monospace}
+.frame{fill:#fdfcfb;stroke:#d8d4cf}.bar{fill:#f2efeb}
+.tile{fill:#f6f4f1;stroke:#e0dcd6}.chip{fill:#f3f0ec;stroke:#dcd7d0}.pill{fill:none;stroke:@AL@}
+.track{fill:#e8e4de}.trk{stroke:#e8e4de}
+.t1{fill:#24292f}.t2{fill:#6a6f78}.ac{fill:@AL@}
+.hash{fill:#9a6700}.ref{fill:#b08800}.head{fill:#0b7fa8}.br{fill:#1a7f37}
+.l1{fill:none;stroke:@AL@}.l2{fill:none;stroke:#8250df}.dot{fill:#fdfcfb}
+.c-blue{fill:#0b7fa8}.c-cyan{fill:#1a7f37}.c-purple{fill:#8250df}.c-green{fill:#9a6700}
+.sep{stroke:#e0dcd6}.d-prod{fill:#1a7f37}.d-proto{fill:#9a6700}
+.k1{fill:#cf222e}.k2{fill:#bf8700}.k3{fill:#1a7f37}
+.h0{fill:#e8e4de}.h1,.h2,.h3,.h4{fill:@AL@}.h1{fill-opacity:.3}.h2{fill-opacity:.55}.h3{fill-opacity:.8}
+@media (prefers-color-scheme:dark){
+.frame{fill:#0f1115;stroke:#2a2e36}.bar{fill:#171a20}
+.tile{fill:#14171c;stroke:#262a31}.chip{fill:#181b21;stroke:#2a2e36}.pill{stroke:@AD@}
+.track{fill:#1f232a}.trk{stroke:#1f232a}
+.t1{fill:#d6dae0}.t2{fill:#868c96}.ac{fill:@AD@}
+.hash{fill:#e3b341}.ref{fill:#d29922}.head{fill:#56d4dd}.br{fill:#56d364}
+.l1{stroke:@AD@}.l2{stroke:#d2a8ff}.dot{fill:#0f1115}
+.c-blue{fill:#56d4dd}.c-cyan{fill:#56d364}.c-purple{fill:#d2a8ff}.c-green{fill:#e3b341}
+.sep{stroke:#262a31}.d-prod{fill:#56d364}.d-proto{fill:#e3b341}
+.h0{fill:#1f232a}.h1,.h2,.h3,.h4{fill:@AD@}}
+</style>"""
+
+THEMES = ("terminal", "editor", "classic", "win11", "macos", "ide", "vim", "notebook", "handheld", "crt",
+          "browser", "sql", "git")
 STYLES = {"terminal": TERMINAL_STYLE, "editor": EDITOR_STYLE, "classic": CLASSIC_STYLE,
           "win11": WIN11_STYLE, "macos": MACOS_STYLE, "ide": IDE_STYLE, "vim": VIM_STYLE,
-          "notebook": NOTEBOOK_STYLE, "handheld": HANDHELD_STYLE, "crt": CRT_STYLE}
+          "notebook": NOTEBOOK_STYLE, "handheld": HANDHELD_STYLE, "crt": CRT_STYLE, "browser": BROWSER_STYLE,
+          "sql": SQL_STYLE, "git": GIT_STYLE}
 
 def style():
     light, dark = ACCENTS.get(ACCENT, ACCENTS["cyan"])
@@ -342,12 +417,30 @@ def codey():
 
 def mono():
     """Themes whose titles, numbers and labels use the monospace font."""
-    return THEME in ("terminal", "editor", "ide", "vim", "handheld", "crt")
+    return THEME in ("terminal", "editor", "ide", "vim", "handheld", "crt", "sql", "git")
 
 
 def retro():
     """Fixed-palette themes drawn with square pixels and block progress bars."""
     return THEME in ("handheld", "crt")
+
+
+LOGIN = ""  # GitHub login, for the browser theme's addresses
+TABLES = {"profileSignal": "signal", "languageStack": "languages", "toolkit": "toolkit", "contributions": "activity"}
+
+
+def short_hash(seed):
+    import hashlib
+    return hashlib.sha1(seed.encode()).hexdigest()[:7]
+
+
+def fit(s, size, width, mono=False):
+    """Cut s with an ellipsis so it fits width."""
+    if text_width(s, size, mono=mono) <= width:
+        return s
+    while s and text_width(s + "…", size, mono=mono) > width:
+        s = s[:-1]
+    return s + "…"
 
 
 LANG_RANK = {}  # language -> position in the language stack, for the fixed-palette themes
@@ -369,7 +462,7 @@ def esc(s):
 
 def text_width(s, size, bold=False, mono=False):
     """Estimated width in px. Conservative: fonts differ between systems."""
-    mono = mono or THEME in ("vim", "handheld", "crt")  # their body font is monospace too
+    mono = mono or THEME in ("vim", "handheld", "crt", "sql")  # their body font is monospace too
     return len(s) * size * (0.62 if mono else 0.6 if bold else 0.55)
 
 
@@ -463,6 +556,15 @@ def wtitle(kind, human, repo=""):
     if THEME == "notebook":
         return {"header": "profile.ipynb", "sig": "signal.ipynb", "lang": "languages.ipynb",
                 "tool": "toolkit.ipynb", "act": "activity.ipynb", "project": repo + ".ipynb"}[kind]
+    if THEME == "browser":
+        tab = {"sig": "signal", "lang": "languages", "tool": "toolkit", "act": "activity"}
+        return human if kind == "header" else f"github.com/{repo}" if kind == "project" else f"github.com/{LOGIN}?tab={tab[kind]}"
+    if THEME == "sql":
+        return f"{LOGIN}@db: " + {"header": "profile", "sig": "signal", "lang": "languages", "tool": "toolkit",
+                                  "act": "activity", "project": repo}[kind]
+    if THEME == "git":
+        return "git log — " + {"header": "profile", "sig": "signal", "lang": "languages", "tool": "toolkit",
+                               "act": "activity", "project": repo}[kind]
     if retro():
         return (repo if kind == "project" else human).upper()
     return human
@@ -472,7 +574,7 @@ def shell(w, h, title=""):
     """Window frame of the active theme, with its title bar. Returns (defs, body)."""
     fw, fh = w - 2 * M, h - 2 * M
     rx = {"terminal": 10, "editor": 6, "classic": 0, "win11": 8, "macos": 10, "ide": 8, "vim": 6,
-          "notebook": 4, "handheld": 4, "crt": 18}[THEME]
+          "notebook": 4, "handheld": 4, "crt": 18, "browser": 8, "sql": 8, "git": 8}[THEME]
     defs = f'<clipPath id="fc"><rect x="{M}" y="{M}" width="{fw}" height="{fh}" rx="{rx}"/></clipPath>'
     frame = f'<rect x="{M}.5" y="{M}.5" width="{fw - 1}" height="{fh - 1}" rx="{rx}" class="frame" stroke-width="1"/>'
     cy = M + BAR // 2
@@ -494,6 +596,53 @@ def shell(w, h, title=""):
         if w == W:  # line numbers in the gutter of full-width cards
             for n, y in enumerate(range(M + BAR + 26, h - M - 8, 21), 1):
                 body += t(M + 24, y, str(n), 10, "ln", anchor="end", mono=True)
+        return defs, body
+
+    if THEME == "browser":  # navigation buttons, address field with a padlock, menu
+        body = frame + bar_bg + bar_line
+        for i, glyph in enumerate(("←", "→", "↻")):
+            body += t(M + 16 + i * 20, cy + 4.5, glyph, 13, "t2", anchor="middle")
+        fx, fw2 = M + 72, w - M - 104
+        body += f'<rect x="{fx}.5" y="{cy - 10}.5" width="{fw2}" height="19" rx="9.5" class="field" stroke-width="1"/>'
+        body += (f'<rect x="{fx + 11}" y="{cy - 1}" width="8" height="6" rx="1" class="t2"/>'
+                 f'<path d="M{fx + 12.5} {cy - 1}v-2a2.5 2.5 0 0 1 5 0v2" fill="none" class="lk" stroke-width="1.4"/>')
+        body += t(fx + 26, cy + 4, fit(title, 11.5, fw2 - 40), 11.5, "t1")
+        body += t(w - M - 16, cy + 4.5, "⋮", 14, "t2", "700", anchor="middle")
+        return defs, body
+
+    if THEME == "sql":  # database icon, connection, status
+        body = frame + bar_bg + bar_line
+        x0 = M + 14
+        body += (f'<path d="M{x0} {cy - 5}v10a6 2.4 0 0 0 12 0v-10" class="db" stroke-width="1.4"/>'
+                 f'<ellipse cx="{x0 + 6}" cy="{cy - 5}" rx="6" ry="2.4" class="db" stroke-width="1.4"/>')
+        status = w == W  # the narrow project cards keep only the dot
+        body += t(M + 34, cy + 4, fit(title, 11.5, w - 2 * M - (150 if status else 60), mono=True), 11.5, "t1", "600", mono=True)
+        dot_x = w - M - (92 if status else 18)
+        body += f'<circle cx="{dot_x}" cy="{cy}" r="3.5" class="d-prod"/>'
+        body += t(w - M - 82, cy + 4, "connected", 11, "t2", mono=True) if status else ""
+        return defs, body
+
+    if THEME == "git":  # branch, title, commit graph in the gutter
+        body = frame + bar_bg + bar_line
+        body += t(M + 14, cy + 4, "⎇ main", 11.5, "ac", "700", mono=True)
+        body += t(w // 2, cy + 4, title, 11.5, "t2", anchor="middle", mono=True)
+        y1, y2 = M + BAR + 10, h - M - 10
+        if w == W:
+            a, b = M + 16, M + 30
+            yb, ym = M + BAR + 70, h - M - 46
+            body += f'<line x1="{a}" y1="{y1}" x2="{a}" y2="{y2}" class="l1" stroke-width="2"/>'
+            if ym - yb > 50:
+                body += (f'<path d="M{a} {yb}c0 12 {b - a} 8 {b - a} 22V{ym - 22}c0 14 {a - b} 10 {a - b} 22" '
+                         'class="l2" stroke-width="2"/>')
+                body += "".join(f'<circle cx="{b}" cy="{y}" r="3.5" class="dot l2" stroke-width="2"/>'
+                                for y in range(yb + 44, ym - 22, 52))
+            body += f'<circle cx="{a}" cy="{M + PX + 36 - M}" r="4.5" class="ac"/>'
+            body += "".join(f'<circle cx="{a}" cy="{y}" r="3.5" class="dot l1" stroke-width="2"/>'
+                            for y in range(M + PX + 90 - M, y2 - 6, 60))
+        else:
+            a = M + 11
+            body += f'<line x1="{a}" y1="{y1}" x2="{a}" y2="{y2}" class="l1" stroke-width="2"/>'
+            body += f'<circle cx="{a}" cy="{M + BAR + 28}" r="4" class="ac"/>'
         return defs, body
 
     if THEME == "ide":  # main toolbar: project, branch, run, window buttons; tool window strip
@@ -585,6 +734,28 @@ def titles(top, title, subtitle, cmd, ident):
             code(IX, top + 40, [("export function ", "kw"), (ident, "fn"), ("() {", "t1")])
             + t(IX, top + 62, f"// {title} · {subtitle}", 12, "cm", mono=True)
         )
+    if THEME == "browser":
+        tw = len(title) * 22 * 0.54  # the box hugs the text, so a closer estimate than text_width
+        tip = f"h2.title  {tw:.0f}×30"
+        tip_w = text_width(tip, 10.5, mono=True) + 12
+        return (
+            f'<rect x="{IX - 5}.5" y="{top + 15}.5" width="{tw + 10:.0f}" height="30" rx="2" class="insp" stroke-width="1" stroke-dasharray="3 2"/>'
+            + t(IX, top + 38, title, 22, "t1", "700")
+            + f'<rect x="{IX + tw + 14:.0f}" y="{top + 20}" width="{tip_w:.0f}" height="20" rx="3" class="tip"/>'
+            + t(IX + tw + 20, top + 34, tip, 10.5, "tipt", mono=True)
+            + t(IX, top + 62, subtitle, 12.5, "t2", "600")
+        )
+    if THEME == "sql":
+        return (
+            code(IX, top + 40, [("db> ", "ac"), ("SELECT * FROM ", "kw"), (TABLES.get(ident, ident), "t1"), (";", "t2")])
+            + t(IX, top + 62, f"-- {title} · {subtitle}", 12, "cm", mono=True)
+        )
+    if THEME == "git":
+        return (
+            code(IX, top + 40, [(short_hash(ident) + " ", "hash"), ("(", "ref"), ("HEAD -> ", "head"), ("main", "br"),
+                                (") ", "ref"), (title, "t1")], 14)
+            + t(IX, top + 62, subtitle, 12, "t2", mono=True)
+        )
     if THEME == "ide":
         return (
             code(IX, top + 40, [("fun ", "kw"), (ident, "fn"), ("() {", "t1")])
@@ -634,7 +805,7 @@ def layout_chips(labels, x0, max_x, size=12, pad=9, gap=6, quoted=False):
 def draw_chips(items, y0, h=24, row_gap=6, size=12, pill=False, tcls="t1"):
     parts = []
     rx = {"terminal": 4, "editor": 3, "classic": 0, "win11": 4, "macos": h / 2, "ide": 4, "vim": 2,
-          "notebook": 3, "handheld": 0, "crt": 0}[THEME]
+          "notebook": 3, "handheld": 0, "crt": 0, "browser": 6, "sql": 0, "git": 4}[THEME]
     for label, x, row, w in items:
         y = y0 + row * (h + row_gap)
         text, cls_text = label, tcls
@@ -646,7 +817,7 @@ def draw_chips(items, y0, h=24, row_gap=6, size=12, pill=False, tcls="t1"):
             if codey() and not pill:
                 text, cls_text = f'"{label}"', "str"
         parts.append(t(f"{x + w / 2:.1f}", y + h / 2 + 4.2, text, size, cls_text,
-                       "600" if pill else None, anchor="middle", mono=(codey() and not pill) or THEME in ("vim", "crt")))
+                       "600" if pill else None, anchor="middle", mono=(codey() and not pill) or THEME in ("vim", "crt", "sql")))
     return "".join(parts)
 
 
@@ -654,7 +825,8 @@ def tile(x, y, w, h):
     """Background of a stat tile."""
     if THEME == "classic":
         return f'<rect x="{x:.0f}" y="{y}" width="{w:.0f}" height="{h}" class="tile"/>' + bevel(round(x), y, round(w), h, raised=False)
-    rx = {"terminal": 6, "editor": 3, "win11": 6, "macos": 10, "ide": 6, "vim": 2, "notebook": 3, "handheld": 0, "crt": 3}[THEME]
+    rx = {"terminal": 6, "editor": 3, "win11": 6, "macos": 10, "ide": 6, "vim": 2, "notebook": 3, "handheld": 0, "crt": 3,
+          "browser": 8, "sql": 0, "git": 6}[THEME]
     sw = 2 if THEME == "handheld" else 1
     return f'<rect x="{x + 0.5:.1f}" y="{y + 0.5}" width="{w:.1f}" height="{h}" rx="{rx}" class="tile" stroke-width="{sw}"/>'
 
@@ -670,7 +842,7 @@ def bar(x, y, w, h, frac, cls=None, color=None):
     """Progress bar: segmented blocks (terminal, classic, retro), flat (editor, vim, notebook) or rounded."""
     frac = min(1, max(frac, 0.03))
     fill = f'class="{cls}"' if cls else f'fill="{color}"'
-    if THEME in ("terminal", "classic") or retro():
+    if THEME in ("terminal", "classic", "git") or retro():
         inner = ""
         if THEME == "classic":  # sunken white trough, blocks inside
             inner = f'<rect x="{x:.1f}" y="{y}" width="{w:.1f}" height="{h}" class="track"/>' + bevel(round(x), y, round(w), h, raised=False)
@@ -683,7 +855,7 @@ def bar(x, y, w, h, frac, cls=None, color=None):
             + (fill if i < on else ('fill="none"' if THEME == "classic" else 'class="track"')) + "/>"
             for i in range(n)
         )
-    r = 1 if THEME in ("editor", "vim", "notebook") else h / 2
+    r = 0 if THEME == "sql" else 1 if THEME in ("editor", "vim", "notebook") else h / 2
     return (
         f'<rect x="{x:.1f}" y="{y}" width="{w:.1f}" height="{h}" rx="{r}" class="track"/>'
         f'<rect x="{x:.1f}" y="{y}" width="{w * frac:.1f}" height="{h}" rx="{r}" {fill}/>'
@@ -695,7 +867,7 @@ def donut(cx, cy, r, frac, color):
     return (
         f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke-width="6" class="trk"/>'
         f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{color}" stroke-width="6" '
-        f'stroke-linecap="{"butt" if THEME in ("terminal", "editor", "classic", "vim") or retro() else "round"}" '
+        f'stroke-linecap="{"butt" if THEME in ("terminal", "editor", "classic", "vim", "sql", "git") or retro() else "round"}" '
         f'stroke-dasharray="{c * frac:.1f} {c:.1f}" transform="rotate(-90 {cx} {cy})"/>'
         + t(cx, cy + 3.8, f"{frac * 100:.0f}%", 10.5, "t1", "700", "middle")
     )
@@ -824,7 +996,7 @@ def build_header(cfg, handle):
         ph = max(ph, 52 + len(fetch) * 21 + 36)
     h = top + ph + 16 + M
     header_title = {"terminal": f"{handle.lower()}@{HOST}: ~", "classic": f"{S['about']} {cfg['name']}",
-                    "ide": handle.lower(), "handheld": "PLAYER 1"}.get(THEME, cfg["name"])
+                    "ide": handle.lower(), "handheld": "PLAYER 1", "browser": f"github.com/{handle}"}.get(THEME, cfg["name"])
     defs, body = shell(W, h, title=wtitle("header", header_title))
     recolor = ""
     if pic and retro():  # luminance mapped to the theme's palette
@@ -909,6 +1081,20 @@ def build_header(cfg, handle):
         body += t(IX, top + 40, "// whoami", 13, "cm", mono=True)
         body += t(IX, top + 86, cfg["name"], 36, "fn", "700", mono=True)
         body += t(IX, top + 112, f'"{cfg["role"]}"', 14, "str", mono=True)
+    elif THEME == "browser":
+        body += t(IX, top + 40, "@" + handle.lower(), 12.5, "t2", "600")
+        nw = len(cfg["name"]) * 36 * 0.54
+        body += f'<rect x="{IX - 5}.5" y="{top + 53}.5" width="{nw + 10:.0f}" height="40" rx="2" class="insp" stroke-width="1" stroke-dasharray="3 2"/>'
+        body += t(IX, top + 84, cfg["name"], 36, "t1", "700")
+        body += t(IX, top + 110, cfg["role"], 15, "ac", "600")
+    elif THEME == "sql":
+        body += code(IX, top + 40, [("db> ", "ac"), ("SELECT ", "kw"), ("name, role ", "t1"), ("FROM ", "kw"), ("me;", "t1")], 13)
+        body += t(IX, top + 86, cfg["name"], name_size - 2, "ac", "800", mono=True)
+        body += t(IX, top + 112, cfg["role"], 15, "t1", "600", mono=True)
+    elif THEME == "git":
+        body += code(IX, top + 40, [("commit ", "t2"), (short_hash(handle), "hash"), (" (", "ref"), ("HEAD -> ", "head"), ("main", "br"), (")", "ref")], 13)
+        body += t(IX, top + 86, cfg["name"], name_size - 2, "ac", "800", mono=True)
+        body += t(IX, top + 112, cfg["role"], 15, "t1", "600", mono=True)
     elif THEME == "ide":
         body += t(IX, top + 40, "/** whoami */", 13, "cm", mono=True)
         body += t(IX, top + 86, cfg["name"], 36, "fn", "700", mono=True)
@@ -942,7 +1128,7 @@ def build_header(cfg, handle):
         body += t(IX, top + 110, cfg["role"], 15, "ac", "600")
     for i, line in enumerate(bio):
         body += t(IX, top + 140 + i * 19, line, 14 if THEME == "crt" else 13, "t1" if THEME in ("classic", "handheld", "crt") else "t2",
-                  mono=THEME in ("vim", "crt"))
+                  mono=THEME in ("vim", "crt", "sql"))
     body += draw_chips(pills, pills_y + 2, h=28, row_gap=6, size=12.5, pill=True, tcls="ac")
     return svg(W, h, f"{cfg['name']}: {cfg['role']}", body, defs)
 
@@ -967,7 +1153,7 @@ def build_project(p, info, layout):
     desc_lines, chips, max_lines, chip_rows, h = layout
     pad = M + 22
     y0 = M + OY
-    defs, body = shell(CARD_W, h, title=wtitle("project", p["title"], p["repo"].split("/")[1]))
+    defs, body = shell(CARD_W, h, title=wtitle("project", p["title"], p["repo"] if THEME == "browser" else p["repo"].split("/")[1]))
     body += t(pad, y0 + 32, p["label"], 10.5, "ac", "700", extra='letter-spacing="1.2"')
     body += t(pad, y0 + 60, p["title"], 19, "fn" if codey() else "t1", "700", mono=mono())
     body += t(pad, y0 + 79, p["repo"], 11.5, "t2", mono=True)
@@ -1014,7 +1200,10 @@ def build_profile_signal(tiles, today):
         weight = "700" if THEME in ("win11", "macos") else "800"
         body += t(x + 18, y + 70, str(value), 36, color, weight, mono=mono())
         body += bar(x + 18, y + 84, tw - 36, 8, value / milestone(value), cls=color)
-    body += t(W - IX, top + ph - 10, f"{S['updated']} {fmt_full(today)}", 10.5, "t2", anchor="end", mono=mono())
+    updated = f"{S['updated']} {fmt_full(today)}"
+    if THEME == "sql":
+        updated = f"{len(tiles)} rows in set (0.01 sec) · {updated}"
+    body += t(W - IX, top + ph - 10, updated, 10.5, "t2", anchor="end", mono=mono())
     return svg(W, h, f"{S['sig_title']}: " + ", ".join(f"{v} {k}" for k, v, _ in tiles), body, defs)
 
 
@@ -1060,7 +1249,7 @@ def build_toolkit(groups):
     return svg(W, h, f"{S['tool_title']}: " + "; ".join(f"{g['label']}: {', '.join(g['items'])}" for g in groups), body, defs)
 
 
-CELL_RX = {"terminal": 1.5, "editor": 1.5, "classic": 0, "vim": 1, "ide": 2, "handheld": 0, "crt": 0}  # heatmap cell corners
+CELL_RX = {"terminal": 1.5, "editor": 1.5, "classic": 0, "vim": 1, "ide": 2, "handheld": 0, "crt": 0, "sql": 0, "git": 1.5}  # heatmap cell corners
 
 
 def level(n, mx):
@@ -1181,7 +1370,7 @@ def build_preview():
 # ───────────────────────── main ─────────────────────────
 
 def main():
-    global TOKEN, ROOT, ASSETS, THEME, ACCENT, S, OY, HOST
+    global TOKEN, ROOT, ASSETS, THEME, ACCENT, S, OY, HOST, LOGIN
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--root", help="folder with data/profile.json (default: parent of scripts/)")
     args = parser.parse_args()
@@ -1200,7 +1389,7 @@ def main():
     S = STRINGS[cfg.get("lang", "en")]
     OY = BAR - 4
     TOKEN = get_token()
-    login = cfg["login"]
+    login = LOGIN = cfg["login"]
     ignore = set(cfg.get("languages_ignore", []))
     today = dt.datetime.now(dt.timezone.utc).date()
     ASSETS.mkdir(exist_ok=True)

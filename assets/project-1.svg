@@ -1,26 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="420" height="303" viewBox="0 0 420 303" role="img" aria-label="CondoHub (Trinity-Codex/Proyecto_CondoHub): Gestión de condominios con roles y varios condominios: gastos comunes, pagos, morosidad, reservas sin traslape e incidentes. Patrones Observer y Strategy. Stack: Django 5.2, MySQL 8, Bootstrap 5, GitHub Actions."><title>CondoHub (Trinity-Codex/Proyecto_CondoHub): Gestión de condominios con roles y varios condominios: gastos comunes, pagos, morosidad, reservas sin traslape e incidentes. Patrones Observer y Strategy. Stack: Django 5.2, MySQL 8, Bootstrap 5, GitHub Actions.</title><style>
 .f{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif}
 .m{font-family:ui-monospace,SFMono-Regular,"SF Mono","JetBrains Mono",Consolas,"Liberation Mono",monospace}
-.frame{fill:#fbfbf8;stroke:#d6d3c9}.bar{fill:#efede6}
-.tile{fill:#f4f2ec;stroke:#dcd8cc}
-.chip{fill:#f1efe8;stroke:#d6d3c9}
-.pill{fill:none;stroke:#0b7fa8}
-.track{fill:#e7e4dc}.trk{stroke:#e7e4dc}
-.t1{fill:#24292f}.t2{fill:#6a6f78}.ac{fill:#0b7fa8}
-.c-blue{fill:#0b7fa8}.c-cyan{fill:#3f7d1c}.c-purple{fill:#7c3aed}.c-green{fill:#9a6700}
-.sep{stroke:#dcd8cc}
-.d-prod{fill:#3f7d1c}.d-proto{fill:#9a6700}
-.k1{fill:#ff5f57}.k2{fill:#febc2e}.k3{fill:#28c840}
-.h0{fill:#e7e4dc}.h1,.h2,.h3,.h4{fill:#0b7fa8}.h1{fill-opacity:.35}.h2{fill-opacity:.6}.h3{fill-opacity:.82}
+.frame{fill:#fdfcfb;stroke:#d8d4cf}.bar{fill:#f2efeb}
+.tile{fill:#f6f4f1;stroke:#e0dcd6}.chip{fill:#f3f0ec;stroke:#dcd7d0}.pill{fill:none;stroke:#c7401b}
+.track{fill:#e8e4de}.trk{stroke:#e8e4de}
+.t1{fill:#24292f}.t2{fill:#6a6f78}.ac{fill:#c7401b}
+.hash{fill:#9a6700}.ref{fill:#b08800}.head{fill:#0b7fa8}.br{fill:#1a7f37}
+.l1{fill:none;stroke:#c7401b}.l2{fill:none;stroke:#8250df}.dot{fill:#fdfcfb}
+.c-blue{fill:#0b7fa8}.c-cyan{fill:#1a7f37}.c-purple{fill:#8250df}.c-green{fill:#9a6700}
+.sep{stroke:#e0dcd6}.d-prod{fill:#1a7f37}.d-proto{fill:#9a6700}
+.k1{fill:#cf222e}.k2{fill:#bf8700}.k3{fill:#1a7f37}
+.h0{fill:#e8e4de}.h1,.h2,.h3,.h4{fill:#c7401b}.h1{fill-opacity:.3}.h2{fill-opacity:.55}.h3{fill-opacity:.8}
 @media (prefers-color-scheme:dark){
-.frame{fill:#0f1117;stroke:#2a2f3a}.bar{fill:#161a22}
-.tile{fill:#131722;stroke:#262c3a}
-.chip{fill:#161b26;stroke:#2a3142}
-.pill{stroke:#7dcfff}
-.track{fill:#1d2230}.trk{stroke:#1d2230}
-.t1{fill:#c0caf5}.t2{fill:#7a829e}.ac{fill:#7dcfff}
-.c-blue{fill:#7dcfff}.c-cyan{fill:#9ece6a}.c-purple{fill:#bb9af7}.c-green{fill:#e0af68}
-.sep{stroke:#262c3a}
-.d-prod{fill:#9ece6a}.d-proto{fill:#e0af68}
-.h0{fill:#1d2230}.h1,.h2,.h3,.h4{fill:#7dcfff}}
-</style><defs><clipPath id="fc"><rect x="6" y="6" width="408" height="291" rx="10"/></clipPath></defs><rect x="6.5" y="6.5" width="407" height="290" rx="10" class="frame" stroke-width="1"/><g clip-path="url(#fc)"><rect x="6" y="6" width="408" height="28" class="bar"/></g><line x1="6" y1="34.5" x2="414" y2="34.5" class="sep" stroke-width="1"/><circle cx="24" cy="20" r="5" class="k1"/><circle cx="40" cy="20" r="5" class="k2"/><circle cx="56" cy="20" r="5" class="k3"/><text x="210" y="24" font-size="11.5" class="m t2" text-anchor="middle" >~/Proyecto_CondoHub</text><text x="28" y="62" font-size="10.5" class="f ac" font-weight="700" letter-spacing="1.2">PLATAFORMA WEB · EQUIPO DE 3</text><text x="28" y="90" font-size="19" class="m t1" font-weight="700" >CondoHub</text><text x="28" y="109" font-size="11.5" class="m t2" >Trinity-Codex/Proyecto_CondoHub</text><circle cx="370" cy="76" r="20" fill="none" stroke-width="6" class="trk"/><circle cx="370" cy="76" r="20" fill="none" stroke="#3572A5" stroke-width="6" stroke-linecap="butt" stroke-dasharray="102.7 125.7" transform="rotate(-90 370 76)"/><text x="370" y="79.8" font-size="10.5" class="f t1" font-weight="700" text-anchor="middle" >82%</text><text x="28" y="138" font-size="13" class="f t1" >Gestión de condominios con roles y varios</text><text x="28" y="157" font-size="13" class="f t1" >condominios: gastos comunes, pagos, morosidad,</text><text x="28" y="176" font-size="13" class="f t1" >reservas sin traslape e incidentes. Patrones</text><text x="28" y="195" font-size="13" class="f t1" >Observer y Strategy.</text><rect x="28.0" y="211" width="80.7" height="24" rx="4" class="chip" stroke-width="1"/><text x="68.3" y="227.2" font-size="12" class="f t1" text-anchor="middle" >Django 5.2</text><rect x="114.7" y="211" width="61.9" height="24" rx="4" class="chip" stroke-width="1"/><text x="145.6" y="227.2" font-size="12" class="f t1" text-anchor="middle" >MySQL 8</text><rect x="182.6" y="211" width="87.0" height="24" rx="4" class="chip" stroke-width="1"/><text x="226.1" y="227.2" font-size="12" class="f t1" text-anchor="middle" >Bootstrap 5</text><rect x="275.6" y="211" width="105.8" height="24" rx="4" class="chip" stroke-width="1"/><text x="328.4" y="227.2" font-size="12" class="f t1" text-anchor="middle" >GitHub Actions</text><line x1="28" y1="251" x2="392" y2="251" class="sep" stroke-width="1"/><circle cx="32" cy="271" r="4" class="d-prod"/><text x="44" y="275" font-size="12" class="f t1" >CI con MySQL 8 · 241 pruebas</text><text x="392" y="275" font-size="11.5" class="f t2" text-anchor="end" >57 commits · 17 nov</text><g clip-path="url(#fc)"><rect x="6.00" y="292" width="333.98" height="5" fill="#3572A5"/><rect x="339.48" y="292" width="59.54" height="5" fill="#e34c26"/><rect x="398.52" y="292" width="8.90" height="5" fill="#d4a72c"/><rect x="406.93" y="292" width="7.57" height="5" fill="#7b5ea7"/></g></svg>
+.frame{fill:#0f1115;stroke:#2a2e36}.bar{fill:#171a20}
+.tile{fill:#14171c;stroke:#262a31}.chip{fill:#181b21;stroke:#2a2e36}.pill{stroke:#f1643f}
+.track{fill:#1f232a}.trk{stroke:#1f232a}
+.t1{fill:#d6dae0}.t2{fill:#868c96}.ac{fill:#f1643f}
+.hash{fill:#e3b341}.ref{fill:#d29922}.head{fill:#56d4dd}.br{fill:#56d364}
+.l1{stroke:#f1643f}.l2{stroke:#d2a8ff}.dot{fill:#0f1115}
+.c-blue{fill:#56d4dd}.c-cyan{fill:#56d364}.c-purple{fill:#d2a8ff}.c-green{fill:#e3b341}
+.sep{stroke:#262a31}.d-prod{fill:#56d364}.d-proto{fill:#e3b341}
+.h0{fill:#1f232a}.h1,.h2,.h3,.h4{fill:#f1643f}}
+</style><defs><clipPath id="fc"><rect x="6" y="6" width="408" height="291" rx="8"/></clipPath></defs><rect x="6.5" y="6.5" width="407" height="290" rx="8" class="frame" stroke-width="1"/><g clip-path="url(#fc)"><rect x="6" y="6" width="408" height="28" class="bar"/></g><line x1="6" y1="34.5" x2="414" y2="34.5" class="sep" stroke-width="1"/><text x="20" y="24" font-size="11.5" class="m ac" font-weight="700" >⎇ main</text><text x="210" y="24" font-size="11.5" class="m t2" text-anchor="middle" >git log — Proyecto_CondoHub</text><line x1="17" y1="44" x2="17" y2="287" class="l1" stroke-width="2"/><circle cx="17" cy="62" r="4" class="ac"/><text x="28" y="62" font-size="10.5" class="f ac" font-weight="700" letter-spacing="1.2">PLATAFORMA WEB · EQUIPO DE 3</text><text x="28" y="90" font-size="19" class="m t1" font-weight="700" >CondoHub</text><text x="28" y="109" font-size="11.5" class="m t2" >Trinity-Codex/Proyecto_CondoHub</text><circle cx="370" cy="76" r="20" fill="none" stroke-width="6" class="trk"/><circle cx="370" cy="76" r="20" fill="none" stroke="#3572A5" stroke-width="6" stroke-linecap="butt" stroke-dasharray="102.7 125.7" transform="rotate(-90 370 76)"/><text x="370" y="79.8" font-size="10.5" class="f t1" font-weight="700" text-anchor="middle" >82%</text><text x="28" y="138" font-size="13" class="f t1" >Gestión de condominios con roles y varios</text><text x="28" y="157" font-size="13" class="f t1" >condominios: gastos comunes, pagos, morosidad,</text><text x="28" y="176" font-size="13" class="f t1" >reservas sin traslape e incidentes. Patrones</text><text x="28" y="195" font-size="13" class="f t1" >Observer y Strategy.</text><rect x="28.0" y="211" width="80.7" height="24" rx="4" class="chip" stroke-width="1"/><text x="68.3" y="227.2" font-size="12" class="f t1" text-anchor="middle" >Django 5.2</text><rect x="114.7" y="211" width="61.9" height="24" rx="4" class="chip" stroke-width="1"/><text x="145.6" y="227.2" font-size="12" class="f t1" text-anchor="middle" >MySQL 8</text><rect x="182.6" y="211" width="87.0" height="24" rx="4" class="chip" stroke-width="1"/><text x="226.1" y="227.2" font-size="12" class="f t1" text-anchor="middle" >Bootstrap 5</text><rect x="275.6" y="211" width="105.8" height="24" rx="4" class="chip" stroke-width="1"/><text x="328.4" y="227.2" font-size="12" class="f t1" text-anchor="middle" >GitHub Actions</text><line x1="28" y1="251" x2="392" y2="251" class="sep" stroke-width="1"/><circle cx="32" cy="271" r="4" class="d-prod"/><text x="44" y="275" font-size="12" class="f t1" >CI con MySQL 8 · 241 pruebas</text><text x="392" y="275" font-size="11.5" class="f t2" text-anchor="end" >57 commits · 17 nov</text><g clip-path="url(#fc)"><rect x="6.00" y="292" width="333.98" height="5" fill="#3572A5"/><rect x="339.48" y="292" width="59.54" height="5" fill="#e34c26"/><rect x="398.52" y="292" width="8.90" height="5" fill="#d4a72c"/><rect x="406.93" y="292" width="7.57" height="5" fill="#7b5ea7"/></g></svg>

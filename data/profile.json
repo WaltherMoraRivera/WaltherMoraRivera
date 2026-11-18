@@ -11,8 +11,8 @@
     "MySQL",
     "IoT"
   ],
-  "theme": "terminal",
-  "accent": "cyan",
+  "theme": "git",
+  "accent": "git",
   "lang": "es",
   "tiles": [
     "repos",
