@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="285" height="26" viewBox="0 0 285 26" role="img" aria-label="Hecho con github-profile-readme-generator"><title>Hecho con github-profile-readme-generator</title><style>
+.f{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif}
+.m{font-family:ui-monospace,SFMono-Regular,"SF Mono","JetBrains Mono",Consolas,"Liberation Mono",monospace}
+.frame{fill:#fdfcfb;stroke:#d8d4cf}.bar{fill:#f2efeb}
+.tile{fill:#f6f4f1;stroke:#e0dcd6}.chip{fill:#f3f0ec;stroke:#dcd7d0}.pill{fill:none;stroke:#c7401b}
+.track{fill:#e8e4de}.trk{stroke:#e8e4de}
+.t1{fill:#24292f}.t2{fill:#6a6f78}.ac{fill:#c7401b}
+.hash{fill:#9a6700}.ref{fill:#b08800}.head{fill:#0b7fa8}.br{fill:#1a7f37}
+.l1{fill:none;stroke:#c7401b}.l2{fill:none;stroke:#8250df}.dot{fill:#fdfcfb}
+.c-blue{fill:#0b7fa8}.c-cyan{fill:#1a7f37}.c-purple{fill:#8250df}.c-green{fill:#9a6700}
+.sep{stroke:#e0dcd6}.d-prod{fill:#1a7f37}.d-proto{fill:#9a6700}
+.k1{fill:#cf222e}.k2{fill:#bf8700}.k3{fill:#1a7f37}
+.h0{fill:#e8e4de}.h1,.h2,.h3,.h4{fill:#c7401b}.h1{fill-opacity:.3}.h2{fill-opacity:.55}.h3{fill-opacity:.8}
+@media (prefers-color-scheme:dark){
+.frame{fill:#0f1115;stroke:#2a2e36}.bar{fill:#171a20}
+.tile{fill:#14171c;stroke:#262a31}.chip{fill:#181b21;stroke:#2a2e36}.pill{stroke:#f1643f}
+.track{fill:#1f232a}.trk{stroke:#1f232a}
+.t1{fill:#d6dae0}.t2{fill:#868c96}.ac{fill:#f1643f}
+.hash{fill:#e3b341}.ref{fill:#d29922}.head{fill:#56d4dd}.br{fill:#56d364}
+.l1{stroke:#f1643f}.l2{stroke:#d2a8ff}.dot{fill:#0f1115}
+.c-blue{fill:#56d4dd}.c-cyan{fill:#56d364}.c-purple{fill:#d2a8ff}.c-green{fill:#e3b341}
+.sep{stroke:#262a31}.d-prod{fill:#56d364}.d-proto{fill:#e3b341}
+.h0{fill:#1f232a}.h1,.h2,.h3,.h4{fill:#f1643f}}
+</style><defs><clipPath id="fc"><rect x="6" y="6" width="273" height="14" rx="6"/></clipPath></defs><rect x="6.5" y="6.5" width="272" height="13" rx="6" class="frame" stroke-width="1"/><rect x="19" y="10" width="12" height="8" rx="2" class="tile" stroke-width="1"/><rect x="15" y="14" width="12" height="8" rx="2" class="ac"/><text x="36" y="17" font-size="11" class="m t2" >hecho con</text><text x="103.38" y="17" font-size="11" class="m t1" font-weight="700" >profile-readme-generator</text></svg>
