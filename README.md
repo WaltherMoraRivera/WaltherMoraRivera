@@ -1,6 +1,6 @@
 <img src="assets/header.svg?v=cc9584de" width="100%" alt="Walther Mora Rivera: Analista Programador · INACAP Apoquindo. Desarrollo aplicaciones web, backend e IoT completas, de la base de datos a la interfaz, y las llevo a producción. Me importan el trabajo en equipo, la documentación y las pruebas.">
 
-<img src="assets/profile-signal.svg?v=fea3e340" width="100%" alt="Señal de perfil">
+<img src="assets/profile-signal.svg?v=457f0608" width="100%" alt="Señal de perfil">
 
 ## Trabajo seleccionado
 
@@ -17,6 +17,6 @@
 
 ## Señal de constancia
 
-<img src="assets/consistency-signal.svg?v=c72c84ad" width="100%" alt="Actividad de contribuciones">
+<img src="assets/consistency-signal.svg?v=863fea48" width="100%" alt="Actividad de contribuciones">
 
-<p align="right"><a href="https://github.com/WaltherMoraRivera/github-profile-readme-generator"><img src="assets/made-with.svg?v=da2549c1" height="26" alt="Hecho con github-profile-readme-generator" title="Hecho con github-profile-readme-generator"></a></p>
+<p align="right"><a href="https://github.com/ProfileStudio/ProfileStudio"><img src="assets/made-with.svg?v=f915ed0a" height="26" alt="Hecho con ProfileStudio" title="Hecho con ProfileStudio"></a></p>
