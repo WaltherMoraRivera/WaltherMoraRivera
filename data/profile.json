@@ -71,19 +71,18 @@
       "kind": "prod"
     },
     {
-      "repo": "WaltherMoraRivera/Proyecto_Iot",
-      "title": "Monitor de vibración IoT",
-      "label": "IoT · SISTEMAS EMBEBIDOS",
-      "desc": "Dos ESP32 conectados por WiFi y MQTT: un nodo detecta vibración sostenida con un MPU6050 y activa la alarma; el otro la controla a distancia con mensajes firmados.",
+      "repo": "ProfileStudio/ProfileStudio",
+      "title": "ProfileStudio",
+      "label": "PLUGIN · CLAUDE CODE",
+      "desc": "Genera tu perfil de GitHub con tus datos reales: tarjetas SVG con estadísticas en vivo, 13 temas, modo claro y oscuro, cabecera animada y respaldos.",
       "stack": [
-        "C++",
-        "ESP32",
-        "MQTT",
-        "HMAC-SHA256",
-        "Wokwi"
+        "Python",
+        "SVG",
+        "GitHub API",
+        "Claude Code"
       ],
-      "status": "Prototipo simulado en Wokwi",
-      "kind": "proto"
+      "status": "v1.8.0 · MIT · público",
+      "kind": "prod"
     }
   ],
   "toolkit": [
